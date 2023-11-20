@@ -1,0 +1,7 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Name=Demo
+Exec=demo
+Categories=Utility;
+Icon=demo
