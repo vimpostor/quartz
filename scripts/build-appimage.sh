@@ -4,9 +4,9 @@ set -e
 
 cd examples/demo
 
-cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
-cmake --build build
-DESTDIR=AppDir cmake --install build
+cmake -B build-appimage -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+cmake --build build-appimage
+DESTDIR=AppDir cmake --install build-appimage
 
 # install placeholder icon
 mkdir -p AppDir/usr/share/icons/hicolor/scalable/apps
