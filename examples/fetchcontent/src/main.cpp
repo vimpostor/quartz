@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
 	QQmlApplicationEngine engine;
 	engine.addImportPath(QStringLiteral(":/"));
 
-	engine.loadFromModule("Demo", "Main");
+	engine.loadFromModule("FetchContent", "Main");
 	if (engine.rootObjects().isEmpty()) {
 		return EXIT_FAILURE;
 	}

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.27)
-project(demo VERSION 1.0)
+project(fetchcontent VERSION 1.0)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -17,13 +17,11 @@ file(GLOB_RECURSE QMLS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "src/qml/*.qml")
 
 qt_add_executable("${PROJECT_NAME}" ${SRCS})
 
-qt_add_qml_module(${PROJECT_NAME} URI "Demo" VERSION "${PROJECT_VERSION}" NO_RESOURCE_TARGET_PATH QML_FILES ${QMLS})
+qt_add_qml_module(${PROJECT_NAME} URI "FetchContent" VERSION "${PROJECT_VERSION}" NO_RESOURCE_TARGET_PATH QML_FILES ${QMLS})
 set_target_properties(${PROJECT_NAME} PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
 
-add_subdirectory(quartz)
+include(FetchContent)
+FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG 1883f8dcea84836394dac33a3a34fccf478af29b)
+FetchContent_MakeAvailable(quartz)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${QT_MODULES} quartz quartzplugin)
-
-# install
-install(TARGETS ${PROJECT_NAME} RUNTIME)
-install(FILES "assets/${PROJECT_NAME}.desktop" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
