@@ -13,7 +13,7 @@ ApplicationWindow {
 		anchors.centerIn: parent
 		text: "Hover me"
 	}
-	Wave {
+	Ripple {
 		anchors.fill: parent
 		size: mousearea.containsMouse ? 1.0 : 0.0
 		centreX: mousearea.mouseX
