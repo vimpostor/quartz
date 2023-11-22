@@ -21,7 +21,10 @@ qt_add_qml_module(${PROJECT_NAME} URI "FetchContent" VERSION "${PROJECT_VERSION}
 set_target_properties(${PROJECT_NAME} PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
 
 include(FetchContent)
-FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG 1883f8dcea84836394dac33a3a34fccf478af29b)
+# For your own projects please use GIT_TAG with a proper static git commit hash or git tag
+# We only use origin/master here, because this demo is actively kept in sync with the latest changes
+# Using origin/master is bad for reproducability and WILL cause breaking changes without you noticing
+FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG origin/master)
 FetchContent_MakeAvailable(quartz)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${QT_MODULES} quartz quartzplugin)
