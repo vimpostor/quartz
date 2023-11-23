@@ -15,9 +15,5 @@ DropArea {
 		size: parent.containsDrag
 		centreX: parent.mouseX
 		centreY: parent.mouseY
-		Label {
-			text: "Drop files here"
-			anchors.centerIn: parent
-		}
 	}
 }

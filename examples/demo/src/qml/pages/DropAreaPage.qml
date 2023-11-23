@@ -11,4 +11,8 @@ DropArea {
 	Snackbar {
 		id: snackbar
 	}
+	Label {
+		text: "Drop files here"
+		anchors.centerIn: parent
+	}
 }

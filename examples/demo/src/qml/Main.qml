@@ -11,36 +11,22 @@ ApplicationWindow {
 	width: 800
 	height: 600
 	Material.theme: Material.System
-	Drawer {
-		id: pagedrawer
-		width: 0.2 * parent.width
-		height: parent.height
-		ListView {
-			anchors.fill: parent
+	TabBar {
+		id: tabbar
+		width: parent.width
+		Repeater {
+			id: repeater
 			model: [
 				"DropArea"
 			]
-			header: Pane {
-				width: parent.width
-				Label {
-					width: parent.width
-					text: "Demo"
-				}
-			}
-			delegate: ItemDelegate {
-				width: parent.width
+			TabButton {
 				text: modelData
-				onClicked: {
-					pageloader.pagename = modelData;
-					pagedrawer.close();
-				}
 			}
 		}
 	}
 	Loader {
-		property string pagename: "DropArea"
 		id: pageloader
-		source: "qrc:/src/qml/pages/" + pagename + "Page.qml"
+		anchors { top: tabbar.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
+		source: "qrc:/src/qml/pages/" + tabbar.currentItem.text + "Page.qml"
 	}
-	DropAreaPage {}
 }
