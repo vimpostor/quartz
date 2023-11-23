@@ -5,6 +5,8 @@
 #include "quartz/version.hpp"
 
 int main(int argc, char *argv[]) {
+	QCoreApplication::setOrganizationName("quartz");
+	QCoreApplication::setApplicationName("demo");
 	QGuiApplication app(argc, argv);
 
 	std::cout << "Using quartz version " << Quartz::Version::version_string() << std::endl;
