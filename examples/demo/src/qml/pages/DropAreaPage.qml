@@ -6,7 +6,7 @@ DropArea {
 	anchors.fill: parent
 	onDropped: (drop) => {
 		snackbar.text = drop.urls[0];
-		snackbar.size = 1;
+		snackbar.open();
 	}
 	Snackbar {
 		id: snackbar

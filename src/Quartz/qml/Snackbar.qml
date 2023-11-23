@@ -2,31 +2,54 @@ import QtQuick
 import QtQuick.Controls.Material
 import Quartz
 
-Ripple {
-	id: ripple
+Popup {
 	property alias text: label.text
-	anchors { bottom: parent.bottom; horizontalCenter: parent.horizontalCenter; margins: 4 }
-	width: row.implicitWidth + 16
-	height: row.implicitHeight
-	color: "transparent"
-	Card {
-		anchors.fill: parent
-		Material.theme: Material.Dark
-		Row {
-			id: row
-			anchors.fill: parent
-			spacing: 8
-			Label {
-				id: label
-				text: "Test"
-				anchors.verticalCenter: parent.verticalCenter
-			}
-			Button {
-				text: "OK"
-				flat: true
-				anchors.verticalCenter: parent.verticalCenter
-				onClicked: ripple.size = 0;
-			}
+	property int offset: 0
+
+	id: snackbarRoot
+	parent: Overlay.overlay
+	x: (parent.width - width) / 2
+	y: parent.height - offset
+	z: 1
+	closePolicy: Popup.NoAutoClose
+	Material.theme: Material.Dark
+	modal: false
+	enter: Transition {
+		NumberAnimation {
+			property: "offset"
+			duration: 200
+			easing.type: Easing.OutCirc
+			from: 0
+			to: implicitHeight + 16
+		}
+	}
+	exit: Transition {
+		NumberAnimation {
+			property: "offset"
+			duration: 200
+			easing.type: Easing.OutCirc
+			to: 0
+		}
+	}
+	Behavior on width {
+		NumberAnimation {
+			easing.type: Easing.OutCirc
+			duration: 64
+		}
+	}
+	width: implicitWidth
+	Row {
+		spacing: 8
+		Label {
+			id: label
+			anchors.verticalCenter: parent.verticalCenter
+		}
+		Button {
+			text: "OK"
+			anchors.verticalCenter: parent.verticalCenter
+			flat: true
+			highlighted: true
+			onClicked: snackbarRoot.close();
 		}
 	}
 }
