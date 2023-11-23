@@ -1,5 +1,3 @@
-# Build with: podman build -t quartz .
-# Run with: podman run -v "$PWD:/output" quartz
 FROM docker.io/vimpostor/appimage-qt6
 
 ADD . /build
