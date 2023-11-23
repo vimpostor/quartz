@@ -17,13 +17,13 @@ file(GLOB_RECURSE QMLS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "src/qml/*.qml")
 
 qt_add_executable("${PROJECT_NAME}" ${SRCS})
 
-qt_add_qml_module(${PROJECT_NAME} URI "Demo" VERSION "${PROJECT_VERSION}" NO_RESOURCE_TARGET_PATH QML_FILES ${QMLS})
-set_target_properties(${PROJECT_NAME} PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
+qt_add_qml_module("${PROJECT_NAME}" URI "Demo" VERSION "${PROJECT_VERSION}" NO_RESOURCE_TARGET_PATH QML_FILES ${QMLS})
+set_target_properties("${PROJECT_NAME}" PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
 
 add_subdirectory(quartz)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE ${QT_MODULES} quartz quartzplugin)
+target_link_libraries("${PROJECT_NAME}" PRIVATE ${QT_MODULES} quartz quartzplugin)
 
 # install
-install(TARGETS ${PROJECT_NAME} RUNTIME)
+install(TARGETS "${PROJECT_NAME}" RUNTIME)
 install(FILES "assets/${PROJECT_NAME}.desktop" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")

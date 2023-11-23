@@ -13,7 +13,7 @@ file(GLOB_RECURSE QMLS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "qml/*.qml")
 qt_add_library("${PROJECT_NAME}" STATIC)
 
 target_include_directories("${PROJECT_NAME}" PUBLIC "..")
-target_link_libraries(${PROJECT_NAME} PRIVATE ${QUARTZ_QT_MODULES})
+target_link_libraries("${PROJECT_NAME}" PRIVATE ${QUARTZ_QT_MODULES})
 
-qt_add_qml_module(${PROJECT_NAME} URI "Quartz" VERSION "${PROJECT_VERSION}" QML_FILES ${QMLS} SOURCES ${SRCS} ${HDRS})
-set_target_properties(${PROJECT_NAME} PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
+qt_add_qml_module("${PROJECT_NAME}" URI "Quartz" VERSION "${PROJECT_VERSION}" QML_FILES ${QMLS} SOURCES ${SRCS} ${HDRS})
+set_target_properties("${PROJECT_NAME}" PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")

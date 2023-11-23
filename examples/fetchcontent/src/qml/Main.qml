@@ -14,7 +14,7 @@ ApplicationWindow {
 		height: width
 		anchors.centerIn: parent
 		Label {
-			text: "Hello"
+			text: "Hello world!"
 			anchors.centerIn: parent
 		}
 	}

@@ -17,14 +17,11 @@ file(GLOB_RECURSE QMLS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "src/qml/*.qml")
 
 qt_add_executable("${PROJECT_NAME}" ${SRCS})
 
-qt_add_qml_module(${PROJECT_NAME} URI "FetchContent" VERSION "${PROJECT_VERSION}" NO_RESOURCE_TARGET_PATH QML_FILES ${QMLS})
-set_target_properties(${PROJECT_NAME} PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
+qt_add_qml_module("${PROJECT_NAME}" URI "FetchContent" VERSION "${PROJECT_VERSION}" NO_RESOURCE_TARGET_PATH QML_FILES ${QMLS})
+set_target_properties("${PROJECT_NAME}" PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
 
 include(FetchContent)
-# For your own projects please use GIT_TAG with a proper static git commit hash or git tag
-# We only use origin/master here, because this demo is actively kept in sync with the latest changes
-# Using origin/master is bad for reproducability and WILL cause breaking changes without you noticing
 FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG origin/master)
 FetchContent_MakeAvailable(quartz)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE ${QT_MODULES} quartz quartzplugin)
+target_link_libraries("${PROJECT_NAME}" PRIVATE ${QT_MODULES} quartz quartzplugin)
