@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <iostream>
 
-#include "Quartz/version.hpp"
+#include "quartz/version.hpp"
 
 int main(int argc, char *argv[]) {
 	QGuiApplication app(argc, argv);
