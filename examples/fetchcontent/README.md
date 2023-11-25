@@ -12,4 +12,4 @@ FetchContent_MakeAvailable(quartz)
 target_link_libraries("${PROJECT_NAME}" PRIVATE quartz quartzplugin)
 ```
 
-After that Quartz should be fully available, that is it can be imported in QML with `import Quartz` and the C++ files can be included with `#include "Quartz/quartz.hpp"` and will be automatically linked.
+After that Quartz should be fully available, that is it can be imported in QML with `import Quartz` and the C++ files can be included with `#include "quartz/quartz.hpp"` and will be automatically linked.

@@ -5,6 +5,7 @@ import Quartz
 Popup {
 	property alias text: label.text
 	property int offset: 0
+	property alias timeout: closeTimer.interval
 
 	id: snackbarRoot
 	parent: Overlay.overlay
@@ -51,5 +52,11 @@ Popup {
 			highlighted: true
 			onClicked: snackbarRoot.close();
 		}
+	}
+	Timer {
+		id: closeTimer
+		interval: 0
+		running: interval > 0 && snackbarRoot.opened
+		onTriggered: snackbarRoot.close();
 	}
 }
