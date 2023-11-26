@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <iostream>
 
-#include "quartz/version.hpp"
+#include "quartz/quartz.hpp"
 
 int main(int argc, char *argv[]) {
 	QCoreApplication::setOrganizationName("quartz");
