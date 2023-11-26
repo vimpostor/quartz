@@ -7,7 +7,7 @@
 int main(int argc, char *argv[]) {
 	QGuiApplication app(argc, argv);
 
-	std::cout << "Using quartz version " << Quartz::Version::version_string() << std::endl;
+	std::cout << "Using quartz version " << quartz::version::version_string() << std::endl;
 
 	QQmlApplicationEngine engine;
 	engine.addImportPath(QStringLiteral(":/"));

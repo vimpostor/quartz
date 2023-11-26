@@ -1,7 +1,7 @@
 #pragma once
 
-namespace Quartz {
-namespace Version {
+namespace quartz {
+namespace version {
 
 const char *version_string();
 
