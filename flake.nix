@@ -28,6 +28,9 @@
 					];
 				};
 			};
+			checks = {
+				format = pkgs.runCommand "format" { src = ./.; nativeBuildInputs = [ pkgs.clang-tools pkgs.git ]; } "mkdir $out && cd $src && find . -type f -path './*\\.[hc]pp' -exec clang-format -style=file --dry-run --Werror {} \\;";
+			};
 		}
 	);
 }
