@@ -24,6 +24,8 @@ add_subdirectory(quartz)
 
 target_link_libraries("${PROJECT_NAME}" PRIVATE ${QT_MODULES} quartz quartzplugin)
 
+quartz_bundle_icons("${PROJECT_NAME}" "content/file_copy")
+
 # install
 install(TARGETS "${PROJECT_NAME}" RUNTIME)
 install(FILES "assets/${PROJECT_NAME}.desktop" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")

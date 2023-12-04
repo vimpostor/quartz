@@ -15,6 +15,7 @@ ApplicationWindow {
 		"Card",
 		"Ripple",
 		"DropArea",
+		"Icons",
 	]
 	Material.theme: Material.System
 	TabBar {
