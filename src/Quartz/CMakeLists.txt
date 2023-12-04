@@ -18,7 +18,8 @@ target_link_libraries("${PROJECT_NAME}" PRIVATE ${QUARTZ_QT_MODULES})
 qt_add_qml_module("${PROJECT_NAME}" URI "Quartz" VERSION "${PROJECT_VERSION}" QML_FILES ${QMLS} SOURCES ${SRCS} ${HDRS})
 set_target_properties("${PROJECT_NAME}" PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
 
-# material design icons
+# Bundle material design icons:
+# Optionally a list of icons can be passed after the target name. Otherwise all icons are bundled.
 function(quartz_bundle_icons target)
 	include(FetchContent)
 	FetchContent_Declare(quartz_icons URL https://github.com/google/material-design-icons/archive/refs/tags/4.0.0.tar.gz URL_HASH SHA256=b1b068d625d5e15d6ec0059209cec67bc4c46e39c4611b859d6f6680dbf23934)
@@ -26,6 +27,11 @@ function(quartz_bundle_icons target)
 
 	# relative paths are required for QRC
 	cmake_path(RELATIVE_PATH quartz_icons_SOURCE_DIR)
+
+	if (NOT ARGN)
+		file(GLOB_RECURSE ARGN "${quartz_icons_SOURCE_DIR}/src/*/*/materialicons/24px.svg")
+		list(TRANSFORM ARGN REPLACE "^.*/src/(.*/.*)/materialicons/24px.svg$" "\\1")
+	endif()
 
 	foreach(ICON IN LISTS ARGN)
 		# this is not platform dependent, the cursed name "Debug-iphoneos" is only necessary to make qmlimportscanner skip this directory for performance reasons: https://code.qt.io/cgit/qt/qtdeclarative.git/tree/tools/qmlimportscanner/main.cpp?h=v6.6.1#n742
