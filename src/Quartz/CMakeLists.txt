@@ -29,7 +29,7 @@ function(quartz_bundle_icons target)
 
 	foreach(ICON IN LISTS ARGN)
 		# this is not platform dependent, the cursed name "Debug-iphoneos" is only necessary to make qmlimportscanner skip this directory for performance reasons: https://code.qt.io/cgit/qt/qtdeclarative.git/tree/tools/qmlimportscanner/main.cpp?h=v6.6.1#n742
-		string(APPEND ICON_FILE "${CMAKE_BINARY_DIR}/icons-Debug-iphoneos/${ICON}.svg")
+		set(ICON_FILE "${CMAKE_BINARY_DIR}/icons-Debug-iphoneos/${ICON}.svg")
 
 		if (NOT EXISTS "${ICON_FILE}")
 			get_filename_component(ICON_DIR "${ICON_FILE}" DIRECTORY)
