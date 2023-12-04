@@ -28,9 +28,21 @@ function(quartz_bundle_icons target)
 	cmake_path(RELATIVE_PATH quartz_icons_SOURCE_DIR)
 
 	foreach(ICON IN LISTS ARGN)
-		list(APPEND QUARTZ_ICONS_LIST "${quartz_icons_SOURCE_DIR}/src/${ICON}/materialicons/24px.svg")
-		set_source_files_properties("${quartz_icons_SOURCE_DIR}/src/${ICON}/materialicons/24px.svg" PROPERTIES QT_RESOURCE_ALIAS "${ICON}")
+		# this is not platform dependent, the cursed name "Debug-iphoneos" is only necessary to make qmlimportscanner skip this directory for performance reasons: https://code.qt.io/cgit/qt/qtdeclarative.git/tree/tools/qmlimportscanner/main.cpp?h=v6.6.1#n742
+		string(APPEND ICON_FILE "${CMAKE_BINARY_DIR}/icons-Debug-iphoneos/${ICON}.svg")
+
+		if (NOT EXISTS "${ICON_FILE}")
+			get_filename_component(ICON_DIR "${ICON_FILE}" DIRECTORY)
+			file(MAKE_DIRECTORY "${ICON_DIR}")
+			file(COPY_FILE "${quartz_icons_SOURCE_DIR}/src/${ICON}/materialicons/24px.svg" "${ICON_FILE}" ONLY_IF_DIFFERENT)
+		endif()
+
+		list(APPEND QUARTZ_ICONS_LIST "${ICON_FILE}")
+		set_source_files_properties("${ICON_FILE}" PROPERTIES QT_RESOURCE_ALIAS "${ICON}")
 	endforeach()
+	# remove the bloated icons repository now, so that qmlimportscanner does not need to traverse it
+	file(REMOVE_RECURSE "${quartz_icons_SOURCE_DIR}")
+
 	qt_add_resources("${target}" QUARTZ_ICONS FILES ${QUARTZ_ICONS_LIST})
 endfunction()
 
