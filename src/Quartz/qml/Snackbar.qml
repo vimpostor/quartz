@@ -12,6 +12,7 @@ Popup {
 	x: (parent.width - width) / 2
 	y: parent.height - offset
 	z: 1
+	padding: 0
 	closePolicy: Popup.NoAutoClose
 	Material.theme: Material.Dark
 	modal: false
@@ -41,6 +42,15 @@ Popup {
 	width: implicitWidth
 	Row {
 		spacing: 8
+		Item {
+			width: 1
+			height: 1
+		}
+		Icon {
+			name: "info"
+			highlighted: true
+			anchors.verticalCenter: parent.verticalCenter
+		}
 		Label {
 			id: label
 			anchors.verticalCenter: parent.verticalCenter
@@ -49,8 +59,11 @@ Popup {
 			text: "OK"
 			anchors.verticalCenter: parent.verticalCenter
 			flat: true
-			highlighted: true
 			onClicked: snackbarRoot.close();
+		}
+		Item {
+			width: 1
+			height: 1
 		}
 	}
 	Timer {
