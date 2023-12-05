@@ -22,9 +22,9 @@ set_target_properties("${PROJECT_NAME}" PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--o
 
 add_subdirectory(quartz)
 
-target_link_libraries("${PROJECT_NAME}" PRIVATE ${QT_MODULES} quartz quartzplugin)
+target_link_libraries("${PROJECT_NAME}" PRIVATE ${QT_MODULES})
 
-quartz_bundle_icons("${PROJECT_NAME}")
+quartz_link("${PROJECT_NAME}" ALL_ICONS)
 
 # install
 install(TARGETS "${PROJECT_NAME}" RUNTIME)

@@ -64,5 +64,20 @@ function(quartz_bundle_icons target)
 	qt_add_resources("${target}" QUARTZ_ICONS PREFIX "/svg" FILES ${QUARTZ_ICONS_LIST})
 endfunction()
 
+function(quartz_link target)
+	target_link_libraries("${target}" PRIVATE quartz quartzplugin)
+
+	cmake_parse_arguments(QUARTZ_LINK "ALL_ICONS;QUARTZ_ICONS" "" "ICONS" ${ARGN})
+
+	if (QUARTZ_LINK_ICONS)
+		quartz_bundle_icons("${target}" ${QUARTZ_LINK_ICONS})
+	elseif (QUARTZ_LINK_ALL_ICONS)
+		quartz_bundle_icons("${target}")
+	elseif (QUARTZ_LINK_QUARTZ_ICONS)
+		# delegate to quartz_bundle_icons, which will automatically add all quartz internal icons as long as one icon is passed
+		quartz_bundle_icons("${target}" "info")
+	endif()
+endfunction()
+
 # install
 install(TARGETS "${PROJECT_NAME}")

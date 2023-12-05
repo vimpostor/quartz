@@ -24,4 +24,6 @@ include(FetchContent)
 FetchContent_Declare(quartz GIT_REPOSITORY https://github.com/vimpostor/quartz.git GIT_TAG origin/master)
 FetchContent_MakeAvailable(quartz)
 
-target_link_libraries("${PROJECT_NAME}" PRIVATE ${QT_MODULES} quartz quartzplugin)
+target_link_libraries("${PROJECT_NAME}" PRIVATE ${QT_MODULES})
+
+quartz_link("${PROJECT_NAME}" ICONS "info" "settings")
