@@ -5,19 +5,10 @@ import Qt.labs.folderlistmodel
 import Quartz
 
 Item {
-	component CategoryModel: FolderListModel {
-		required property string category
-		folder: "qrc:/" + category
+	FolderListModel {
+		id: iconModel
+		folder: "qrc:/svg"
 		showDirs: false
-		onCountChanged: iconModel.apply();
-	}
-	Instantiator {
-		id: modelInstantiator
-		model: [ "action", "alert", "av", "communication", "content", "device", "editor", "file", "hardware", "home", "image", "maps", "navigation", "notification", "places", "social", "toggle" ]
-		CategoryModel {
-			required property string modelData
-			category: modelData
-		}
 	}
 	ColumnLayout {
 		anchors.fill: parent
@@ -25,7 +16,7 @@ Item {
 		TextField {
 			id: search
 			Layout.fillWidth: true
-			placeholderText: "Search..."
+			placeholderText: "Search"
 		}
 		ListView {
 			clip: true
@@ -34,10 +25,11 @@ Item {
 			Component {
 				id: iconDelegate
 				ItemDelegate {
+					required property string fileName
 					width: parent ? parent.width : 0
-					icon.source: "/" + text
-					text: category + "/" + name
-					visible: name.indexOf(search.text) != -1 || category.indexOf(search.text) != -1
+					icon.source: "/svg/" + text
+					text: fileName
+					visible: fileName.indexOf(search.text) != -1
 					height: visible * implicitHeight
 					onClicked: {
 						Quartz.copyClipboard(text);
@@ -46,18 +38,7 @@ Item {
 					}
 				}
 			}
-			model: ListModel {
-				id: iconModel
-				function apply() {
-					clear();
-					for (var i = 0; i < modelInstantiator.count; i++) {
-						var m = modelInstantiator.objectAt(i);
-						for (var j = 0; j < m.count; j++) {
-							append({"name": m.get(j, "fileName"), "category": m.category});
-						}
-					}
-				}
-			}
+			model: iconModel
 			delegate: iconDelegate
 		}
 	}

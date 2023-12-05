@@ -23,32 +23,32 @@ set_target_properties("${PROJECT_NAME}" PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--o
 # Optionally a list of icons can be passed after the target name. Otherwise all icons are bundled.
 function(quartz_bundle_icons target)
 	include(FetchContent)
-	FetchContent_Declare(quartz_icons URL https://github.com/google/material-design-icons/archive/refs/tags/4.0.0.tar.gz URL_HASH SHA256=b1b068d625d5e15d6ec0059209cec67bc4c46e39c4611b859d6f6680dbf23934)
+	FetchContent_Declare(quartz_icons URL https://github.com/marella/material-symbols/archive/refs/tags/v0.14.1.tar.gz URL_HASH SHA256=e41d1e52939c7cf1af87fde1ea33d10994aaaa2eb2b93a8a568c9ef24d8bb3c2)
 	FetchContent_MakeAvailable(quartz_icons)
 
 	# relative paths are required for QRC
 	cmake_path(RELATIVE_PATH quartz_icons_SOURCE_DIR)
 
 	if (NOT ARGN)
-		file(GLOB_RECURSE ARGN "${quartz_icons_SOURCE_DIR}/src/*/*/materialicons/24px.svg")
-		list(TRANSFORM ARGN REPLACE "^.*/src/(.*/.*)/materialicons/24px.svg$" "\\1")
+		file(GLOB_RECURSE ARGN "${quartz_icons_SOURCE_DIR}/svg/500/outlined/*.svg")
+		list(TRANSFORM ARGN REPLACE "^.*/svg/500/outlined/(.*).svg$" "\\1")
 
 		if (NOT ARGN)
 			# icons already moved
-			file(GLOB_RECURSE ARGN "${CMAKE_BINARY_DIR}/icons-Debug-iphoneos/*/*.svg")
-			list(TRANSFORM ARGN REPLACE "^.*/icons-Debug-iphoneos/(.*/.*)\.svg$" "\\1")
+			file(GLOB_RECURSE ARGN "${CMAKE_BINARY_DIR}/icons-Debug-iphoneos/*.svg")
+			list(TRANSFORM ARGN REPLACE "^.*/icons-Debug-iphoneos/(.*)\.svg$" "\\1")
 		endif()
 	endif()
 
 	set(QUARTZ_ICONS_LIST "")
 	foreach(ICON IN LISTS ARGN)
-		# this is not platform dependent, the cursed name "Debug-iphoneos" is only necessary to make qmlimportscanner skip this directory for performance reasons: https://code.qt.io/cgit/qt/qtdeclarative.git/tree/tools/qmlimportscanner/main.cpp?h=v6.6.1#n742
+		# the cursed name "Debug-iphoneos" is only necessary to make qmlimportscanner skip this directory for performance reasons: https://code.qt.io/cgit/qt/qtdeclarative.git/tree/tools/qmlimportscanner/main.cpp?h=v6.6.1#n742
 		set(ICON_FILE "${CMAKE_BINARY_DIR}/icons-Debug-iphoneos/${ICON}.svg")
 
 		if (NOT EXISTS "${ICON_FILE}")
 			get_filename_component(ICON_DIR "${ICON_FILE}" DIRECTORY)
 			file(MAKE_DIRECTORY "${ICON_DIR}")
-			file(COPY_FILE "${quartz_icons_SOURCE_DIR}/src/${ICON}/materialicons/24px.svg" "${ICON_FILE}" ONLY_IF_DIFFERENT)
+			file(COPY_FILE "${quartz_icons_SOURCE_DIR}/svg/500/outlined/${ICON}.svg" "${ICON_FILE}" ONLY_IF_DIFFERENT)
 		endif()
 
 		list(APPEND QUARTZ_ICONS_LIST "${ICON_FILE}")
@@ -57,7 +57,7 @@ function(quartz_bundle_icons target)
 	# remove the bloated icons repository now, so that qmlimportscanner does not try to traverse it
 	file(REMOVE_RECURSE "${quartz_icons_SOURCE_DIR}")
 
-	qt_add_resources("${target}" QUARTZ_ICONS FILES ${QUARTZ_ICONS_LIST})
+	qt_add_resources("${target}" QUARTZ_ICONS PREFIX "/svg" FILES ${QUARTZ_ICONS_LIST})
 endfunction()
 
 # install
