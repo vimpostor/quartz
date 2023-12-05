@@ -12,6 +12,7 @@ Item {
 			id: search
 			Layout.fillWidth: true
 			placeholderText: "Search"
+			focus: true
 		}
 		ListView {
 			clip: true

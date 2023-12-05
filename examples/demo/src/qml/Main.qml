@@ -37,6 +37,7 @@ ApplicationWindow {
 	}
 	Loader {
 		id: pageloader
+		focus: true
 		anchors { top: tabbar.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
 		source: pagesmodel.status == FolderListModel.Ready ? "qrc:/src/qml/pages/" + pagesmodel.get(tabbar.currentIndex, "fileName") : ""
 	}
