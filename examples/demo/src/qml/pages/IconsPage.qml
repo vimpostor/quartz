@@ -28,11 +28,16 @@ Item {
 				width: parent ? parent.width : 0
 				icon.source: "/svg/" + text
 				text: fileName
-				visible: fileName.indexOf(search.text) != -1
-				height: visible * implicitHeight
+				height: implicitHeight * (fileName.indexOf(search.text) != -1)
+				Behavior on height {
+					NumberAnimation {
+						easing.type: Easing.OutCirc
+						duration: 128
+					}
+				}
 				onClicked: {
-					Quartz.copyClipboard(text);
-					snackbar.text = "Copied \"" + text + "\"";
+					Quartz.copyClipboard(icon.source);
+					snackbar.text = "Copied \"" + icon.source + "\"";
 					snackbar.open();
 				}
 			}
