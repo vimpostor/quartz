@@ -1,7 +1,6 @@
 import QtCore
 import QtQuick
 import QtQuick.Controls.Material
-import Qt.labs.folderlistmodel
 import Quartz
 import Demo
 
