@@ -1,6 +1,7 @@
 import QtCore
 import QtQuick
 import QtQuick.Controls.Material
+import Qt.labs.folderlistmodel
 import Quartz
 import Demo
 
@@ -10,29 +11,37 @@ ApplicationWindow {
 	title: "Demo"
 	width: 800
 	height: 600
-	property var pages: [
-		"Card",
-		"Ripple",
-		"DropArea",
-		"Icons",
-	]
 	Material.theme: Material.System
+	FolderListModel {
+		id: pagesmodel
+		folder: "qrc:/src/qml/pages"
+		showDirs: false
+		nameFilters: "*Page.qml"
+		onStatusChanged: {
+			if (status == FolderListModel.Ready) {
+				tabbar.currentIndex = settings.currentTab;
+			}
+		}
+	}
 	TabBar {
 		id: tabbar
 		width: parent.width
 		Repeater {
-			model: pages
+			model: pagesmodel
 			TabButton {
-				text: modelData
+				required property string fileName
+				text: fileName.slice(0, -8)
 			}
 		}
+		Component.onDestruction: settings.currentTab = currentIndex;
 	}
 	Loader {
 		id: pageloader
 		anchors { top: tabbar.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
-		source: "qrc:/src/qml/pages/" + root.pages[tabbar.currentIndex] + "Page.qml"
+		source: pagesmodel.status == FolderListModel.Ready ? "qrc:/src/qml/pages/" + pagesmodel.get(tabbar.currentIndex, "fileName") : ""
 	}
 	Settings {
-		property alias currentTab: tabbar.currentIndex
+		id: settings
+		property int currentTab: 0
 	}
 }
