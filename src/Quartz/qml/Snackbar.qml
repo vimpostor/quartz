@@ -55,7 +55,7 @@ Popup {
 	}
 	Timer {
 		id: closeTimer
-		interval: 0
+		interval: 2000
 		running: interval > 0 && snackbarRoot.opened
 		onTriggered: snackbarRoot.close();
 	}

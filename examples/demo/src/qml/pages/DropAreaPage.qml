@@ -10,7 +10,6 @@ DropArea {
 	}
 	Snackbar {
 		id: snackbar
-		timeout: 2000
 	}
 	Label {
 		text: "Drop files here"

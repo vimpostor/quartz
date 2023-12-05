@@ -39,6 +39,11 @@ Item {
 					text: category + "/" + name
 					visible: name.indexOf(search.text) != -1
 					height: visible * implicitHeight
+					onClicked: {
+						Quartz.copyClipboard(text);
+						snackbar.text = "Copied \"" + text + "\"";
+						snackbar.open();
+					}
 				}
 			}
 			model: ListModel {
@@ -55,5 +60,8 @@ Item {
 			}
 			delegate: iconDelegate
 		}
+	}
+	Snackbar {
+		id: snackbar
 	}
 }

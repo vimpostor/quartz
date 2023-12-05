@@ -1,5 +1,8 @@
 #pragma once
 
+#include <QJSEngine>
+#include <QQmlEngine>
+
 // unfortunately macros don't support namespaces, so don't bother with one
 
 #define SINGLETON(TYPE) \

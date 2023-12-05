@@ -13,6 +13,7 @@ file(GLOB_RECURSE QMLS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "qml/*.qml")
 qt_add_library("${PROJECT_NAME}" STATIC)
 
 target_include_directories("${PROJECT_NAME}" PUBLIC ".")
+target_include_directories("${PROJECT_NAME}" PUBLIC "quartz")
 target_link_libraries("${PROJECT_NAME}" PRIVATE ${QUARTZ_QT_MODULES})
 
 qt_add_qml_module("${PROJECT_NAME}" URI "Quartz" VERSION "${PROJECT_VERSION}" QML_FILES ${QMLS} SOURCES ${SRCS} ${HDRS})
@@ -53,7 +54,7 @@ function(quartz_bundle_icons target)
 		list(APPEND QUARTZ_ICONS_LIST "${ICON_FILE}")
 		set_source_files_properties("${ICON_FILE}" PROPERTIES QT_RESOURCE_ALIAS "${ICON}")
 	endforeach()
-	# remove the bloated icons repository now, so that qmlimportscanner does not need to traverse it
+	# remove the bloated icons repository now, so that qmlimportscanner does not try to traverse it
 	file(REMOVE_RECURSE "${quartz_icons_SOURCE_DIR}")
 
 	qt_add_resources("${target}" QUARTZ_ICONS FILES ${QUARTZ_ICONS_LIST})
