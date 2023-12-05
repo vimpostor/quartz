@@ -31,8 +31,15 @@ function(quartz_bundle_icons target)
 	if (NOT ARGN)
 		file(GLOB_RECURSE ARGN "${quartz_icons_SOURCE_DIR}/src/*/*/materialicons/24px.svg")
 		list(TRANSFORM ARGN REPLACE "^.*/src/(.*/.*)/materialicons/24px.svg$" "\\1")
+
+		if (NOT ARGN)
+			# icons already moved
+			file(GLOB_RECURSE ARGN "${CMAKE_BINARY_DIR}/icons-Debug-iphoneos/*/*.svg")
+			list(TRANSFORM ARGN REPLACE "^.*/icons-Debug-iphoneos/(.*/.*)\.svg$" "\\1")
+		endif()
 	endif()
 
+	set(QUARTZ_ICONS_LIST "")
 	foreach(ICON IN LISTS ARGN)
 		# this is not platform dependent, the cursed name "Debug-iphoneos" is only necessary to make qmlimportscanner skip this directory for performance reasons: https://code.qt.io/cgit/qt/qtdeclarative.git/tree/tools/qmlimportscanner/main.cpp?h=v6.6.1#n742
 		set(ICON_FILE "${CMAKE_BINARY_DIR}/icons-Debug-iphoneos/${ICON}.svg")
