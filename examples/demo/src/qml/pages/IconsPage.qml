@@ -37,7 +37,7 @@ Item {
 					width: parent ? parent.width : 0
 					icon.source: "/" + text
 					text: category + "/" + name
-					visible: name.indexOf(search.text) != -1
+					visible: name.indexOf(search.text) != -1 || category.indexOf(search.text) != -1
 					height: visible * implicitHeight
 					onClicked: {
 						Quartz.copyClipboard(text);
