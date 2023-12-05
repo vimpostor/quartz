@@ -17,8 +17,8 @@ After that Quartz should be fully available, that is it can be imported in QML w
 
 ## Icons
 
-If you want icons to be bundled, pass the `ICONS` parameter to the `quartz_link()` call, which may be followed by icon names of [Material design symbols](https://fonts.google.com/icons) as additional parameters. Following is an example that bundles two icons, which will be accessible under the `:/svg/` [qrc](https://doc.qt.io/qt-6/resources.html) directory.
-Note that quartz will automatically add all internally needed icons to the list that you pass via `ICONS`. If you want to bundle all icons, add the `ALL_ICONS` parameter. If you only want to bundle internally needed icons, use `QUARTZ_ICONS` instead.
+If you want icons to be bundled, pass the `ICONS` parameter to the `quartz_link()` call, which must be followed by icon names of [Material design symbols](https://fonts.google.com/icons) as additional parameters. Following is an example that bundles two icons, which will be accessible under the `:/svg/` [qrc](https://doc.qt.io/qt-6/resources.html) directory.
+Note that quartz will automatically add all internally needed icons to the list that you pass via `ICONS`. If you want to bundle all icons, add the `ALL_ICONS` parameter instead. If you only want to bundle internally needed icons, use `QUARTZ_ICONS` instead.
 If neither of these three parameters are used, no icons will be bundled, which may result in some QML UI components not working correctly.
 
 ```cmake
@@ -27,3 +27,5 @@ quartz_link("${PROJECT_NAME}" ALL_ICONS) # bundle all icons
 quartz_link("${PROJECT_NAME}" QUARTZ_ICONS) # bundle quartz-internal icons only
 quartz_link("${PROJECT_NAME}") # bundle no icons
 ```
+
+The reason why it is allowed to bundle no icons, is because this allows users who do not need any icons to skip the download of the SVG icons during the cmake configure stage.

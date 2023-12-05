@@ -69,10 +69,12 @@ function(quartz_link target)
 
 	cmake_parse_arguments(QUARTZ_LINK "ALL_ICONS;QUARTZ_ICONS" "" "ICONS" ${ARGN})
 
-	if (QUARTZ_LINK_ICONS)
-		quartz_bundle_icons("${target}" ${QUARTZ_LINK_ICONS})
-	elseif (QUARTZ_LINK_ALL_ICONS)
+	if (QUARTZ_LINK_ALL_ICONS)
+		# bundle all icons
 		quartz_bundle_icons("${target}")
+	elseif (QUARTZ_LINK_ICONS)
+		# bundle passed icons, plus internally needed icons
+		quartz_bundle_icons("${target}" ${QUARTZ_LINK_ICONS})
 	elseif (QUARTZ_LINK_QUARTZ_ICONS)
 		# delegate to quartz_bundle_icons, which will automatically add all quartz internal icons as long as one icon is passed
 		quartz_bundle_icons("${target}" "info")
