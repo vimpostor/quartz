@@ -13,6 +13,7 @@ Item {
 			Layout.fillWidth: true
 			placeholderText: "Search"
 			focus: true
+			Material.containerStyle: Material.Filled
 		}
 		ListView {
 			clip: true
