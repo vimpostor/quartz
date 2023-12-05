@@ -18,6 +18,7 @@ Item {
 			clip: true
 			Layout.fillWidth: true
 			Layout.fillHeight: true
+			ScrollBar.vertical: ScrollBar {}
 			model: FolderListModel {
 				folder: "qrc:/svg"
 				showDirs: false
