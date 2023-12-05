@@ -29,7 +29,11 @@ function(quartz_bundle_icons target)
 	# relative paths are required for QRC
 	cmake_path(RELATIVE_PATH quartz_icons_SOURCE_DIR)
 
-	if (NOT ARGN)
+	if (ARGN)
+		# not bundling all icons, manually append icons that are needed by Quartz itself
+		list(APPEND ARGN "info")
+		list(REMOVE_DUPLICATES ARGN)
+	else()
 		file(GLOB_RECURSE ARGN "${quartz_icons_SOURCE_DIR}/svg/500/outlined/*.svg")
 		list(TRANSFORM ARGN REPLACE "^.*/svg/500/outlined/(.*).svg$" "\\1")
 

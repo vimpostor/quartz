@@ -13,3 +13,11 @@ target_link_libraries("${PROJECT_NAME}" PRIVATE quartz quartzplugin)
 ```
 
 After that Quartz should be fully available, that is it can be imported in QML with `import Quartz` and the C++ files can be included with `#include "quartz/quartz.hpp"` and will be automatically linked.
+
+## Icons
+
+If you want icons to be bundled, call the `quartz_bundle_icons()` cmake function, the first parameter is your cmake `TARGET` and after that you may pass icon names of [Material design symbols](https://fonts.google.com/icons) as additional parameters. If no trailing arguments are passed, **all** icons will be bundled. Here is an example that bundles two icons, which will be accessible under the `:/svg/` [qrc](https://doc.qt.io/qt-6/resources.html) directory:
+
+```cmake
+quartz_bundle_icons("${PROJECT_NAME}" "info" "settings")
+```
