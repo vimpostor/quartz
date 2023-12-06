@@ -71,7 +71,7 @@ function(quartz_link target)
 		quartz_bundle_icons("${target}")
 	elseif (QUARTZ_LINK_ICONS OR QUARTZ_LINK_INTERNAL_ICONS)
 		# not bundling all icons, manually append icons that are needed by Quartz itself
-		list(APPEND QUARTZ_LINK_ICONS "info")
+		list(APPEND QUARTZ_LINK_ICONS "close")
 		list(REMOVE_DUPLICATES QUARTZ_LINK_ICONS)
 		quartz_bundle_icons("${target}" ${QUARTZ_LINK_ICONS})
 	endif()

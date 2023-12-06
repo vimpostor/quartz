@@ -4,8 +4,11 @@ import Quartz
 
 Popup {
 	property alias text: label.text
+	property alias action: actionButton.text
 	property int offset: 0
 	property alias timeout: closeTimer.interval
+	property alias dismissible: closeButton.visible
+	signal clicked()
 
 	id: snackbarRoot
 	parent: Overlay.overlay
@@ -41,24 +44,28 @@ Popup {
 	}
 	width: implicitWidth
 	Row {
-		spacing: 8
+		spacing: 12
 		Item {
-			width: 1
-			height: 1
-		}
-		Icon {
-			name: "info"
-			highlighted: true
-			anchors.verticalCenter: parent.verticalCenter
+			width: 4
+			height: 48
 		}
 		Label {
 			id: label
 			anchors.verticalCenter: parent.verticalCenter
 		}
 		Button {
-			text: "OK"
+			id: actionButton
+			visible: text
+			Material.foreground: Material.accent
 			anchors.verticalCenter: parent.verticalCenter
 			flat: true
+			onClicked: snackbarRoot.clicked();
+		}
+		Icon {
+			id: closeButton
+			name: "close"
+			hoverEnabled: true
+			anchors.verticalCenter: parent.verticalCenter
 			onClicked: snackbarRoot.close();
 		}
 		Item {
@@ -68,7 +75,7 @@ Popup {
 	}
 	Timer {
 		id: closeTimer
-		interval: 2000
+		interval: 3000
 		running: interval > 0 && snackbarRoot.opened
 		onTriggered: snackbarRoot.close();
 	}
