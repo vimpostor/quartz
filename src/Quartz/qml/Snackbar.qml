@@ -61,10 +61,9 @@ Popup {
 			flat: true
 			onClicked: snackbarRoot.clicked();
 		}
-		Icon {
+		IconButton {
 			id: closeButton
 			name: "close"
-			clickable: true
 			anchors.verticalCenter: parent.verticalCenter
 			onClicked: snackbarRoot.close();
 		}
