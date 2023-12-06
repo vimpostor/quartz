@@ -64,7 +64,7 @@ Popup {
 		Icon {
 			id: closeButton
 			name: "close"
-			hoverEnabled: true
+			clickable: true
 			anchors.verticalCenter: parent.verticalCenter
 			onClicked: snackbarRoot.close();
 		}

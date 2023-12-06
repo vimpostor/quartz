@@ -5,8 +5,9 @@ import Quartz
 ToolButton {
 	property string name;
 	property int size: 24
-	hoverEnabled: false
+	property bool clickable: false
 
+	hoverEnabled: clickable
 	focusPolicy: hoverEnabled ? Qt.StrongFocus : Qt.NoFocus
 	icon.source: "/svg/" + name
 	display: AbstractButton.IconOnly
