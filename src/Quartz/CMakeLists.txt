@@ -64,12 +64,12 @@ endfunction()
 function(quartz_link target)
 	target_link_libraries("${target}" PRIVATE quartz quartzplugin)
 
-	cmake_parse_arguments(QUARTZ_LINK "ALL_ICONS;QUARTZ_ICONS" "" "ICONS" ${ARGN})
+	cmake_parse_arguments(QUARTZ_LINK "ALL_ICONS;INTERNAL_ICONS" "" "ICONS" ${ARGN})
 
 	if (QUARTZ_LINK_ALL_ICONS)
 		# bundle all icons
 		quartz_bundle_icons("${target}")
-	elseif (QUARTZ_LINK_ICONS OR QUARTZ_LINK_QUARTZ_ICONS)
+	elseif (QUARTZ_LINK_ICONS OR QUARTZ_LINK_INTERNAL_ICONS)
 		# not bundling all icons, manually append icons that are needed by Quartz itself
 		list(APPEND QUARTZ_LINK_ICONS "info")
 		list(REMOVE_DUPLICATES QUARTZ_LINK_ICONS)
