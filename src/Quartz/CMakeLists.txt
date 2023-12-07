@@ -45,7 +45,9 @@ endfunction()
 
 function(quartz_link target)
 	target_link_libraries("${target}" PRIVATE quartz quartzplugin)
-	quartz_bundle_icons("${target}")
+	if (NOT QUARTZ_NO_ICONS)
+		quartz_bundle_icons("${target}")
+	endif()
 endfunction()
 
 # install
