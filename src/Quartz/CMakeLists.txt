@@ -44,8 +44,10 @@ function(quartz_bundle_icons target)
 endfunction()
 
 function(quartz_link target)
+	cmake_parse_arguments(QUARTZ_LINK "NO_ICONS" "" "" ${ARGN})
+
 	target_link_libraries("${target}" PRIVATE quartz quartzplugin)
-	if (NOT QUARTZ_NO_ICONS)
+	if (NOT QUARTZ_LINK_NO_ICONS)
 		quartz_bundle_icons("${target}")
 	endif()
 endfunction()
