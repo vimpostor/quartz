@@ -22,16 +22,16 @@ qt_add_qml_module("${PROJECT_NAME}" URI "Quartz" VERSION "${PROJECT_VERSION}" QM
 set_target_properties("${PROJECT_NAME}" PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
 
 # Bundle material design icons
-function(quartz_bundle_icons target)
+function(quartz_bundle_icons target style)
 	include(FetchContent)
 
 	set(QUARTZ_ICONS_ARCHIVE "https://github.com/google/material-design-icons/raw/a90037f80d7db37279a7c1d863559e247ed81b05/variablefont")
-	set(QUARTZ_ICONS_NAME "MaterialSymbolsOutlined%5BFILL,GRAD,opsz,wght%5D")
+	set(QUARTZ_ICONS_NAME "MaterialSymbols${style}%5BFILL,GRAD,opsz,wght%5D")
 
-	FetchContent_Declare(quartz_icons URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.woff2" URL_HASH SHA256=9e97a755f27f4c31517494fc34142220865332de65b00f4dd62013b83fb1e44d DOWNLOAD_NO_EXTRACT ON)
+	FetchContent_Declare(quartz_icons URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.woff2" DOWNLOAD_NO_EXTRACT ON)
 	FetchContent_MakeAvailable(quartz_icons)
 
-	FetchContent_Declare(quartz_codepoints URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.codepoints" URL_HASH SHA256=588edd648bbc6f0ce01351985f65f52178630180da7a03c5153c5638ce9f6fa7 DOWNLOAD_NO_EXTRACT ON)
+	FetchContent_Declare(quartz_codepoints URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.codepoints" DOWNLOAD_NO_EXTRACT ON)
 	FetchContent_MakeAvailable(quartz_codepoints)
 
 	# relative paths are required for QRC
@@ -44,11 +44,16 @@ function(quartz_bundle_icons target)
 endfunction()
 
 function(quartz_link target)
-	cmake_parse_arguments(QUARTZ_LINK "NO_ICONS" "" "" ${ARGN})
+	cmake_parse_arguments(QUARTZ_LINK "NO_ICONS" "ICON_STYLE" "" ${ARGN})
 
 	target_link_libraries("${target}" PRIVATE quartz quartzplugin)
+
+	if (NOT QUARTZ_LINK_ICON_STYLE)
+		set(QUARTZ_LINK_ICON_STYLE "Outlined") # possible values: Outlined, Rounded, Sharp
+	endif()
+
 	if (NOT QUARTZ_LINK_NO_ICONS)
-		quartz_bundle_icons("${target}")
+		quartz_bundle_icons("${target}" "${QUARTZ_LINK_ICON_STYLE}")
 	endif()
 endfunction()
 
