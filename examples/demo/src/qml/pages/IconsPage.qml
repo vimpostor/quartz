@@ -20,16 +20,12 @@ Item {
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			ScrollBar.vertical: ScrollBar {}
-			model: FolderListModel {
-				folder: "qrc:/svg"
-				showDirs: false
-			}
+			model: Codepoints.allIconNames()
 			delegate: ItemDelegate {
-				required property string fileName
+				text: modelData
 				width: parent ? parent.width : 0
-				icon.source: "/svg/" + text
-				text: fileName
-				height: implicitHeight * (fileName.indexOf(search.text) != -1)
+				height: implicitHeight * (modelData.indexOf(search.text) != -1)
+				visible: height
 				Behavior on height {
 					NumberAnimation {
 						easing.type: Easing.OutCirc
@@ -38,8 +34,13 @@ Item {
 				}
 				onClicked: {
 					Quartz.copyClipboard(icon.source);
-					snackbar.text = "Copied \"" + icon.source + "\"";
+					snackbar.text = "Copied \"" + modelData + "\"";
 					snackbar.open();
+				}
+				Icon {
+					anchors { verticalCenter: parent.verticalCenter; right: parent.right; margins: 32 }
+					name: modelData
+					size: parent.height
 				}
 			}
 		}

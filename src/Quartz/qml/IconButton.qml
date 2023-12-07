@@ -2,6 +2,11 @@ import QtQuick
 import QtQuick.Controls.Material
 import Quartz
 
-Icon {
-	clickable: true
+ToolButton {
+	property alias ico: ic
+	padding: 0
+	Icon {
+		id: ic
+		anchors.fill: parent
+	}
 }

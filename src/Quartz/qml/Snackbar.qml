@@ -63,7 +63,7 @@ Popup {
 		}
 		IconButton {
 			id: closeButton
-			name: "close"
+			ico.name: "close"
 			anchors.verticalCenter: parent.verticalCenter
 			onClicked: snackbarRoot.close();
 		}

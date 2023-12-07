@@ -26,4 +26,4 @@ FetchContent_MakeAvailable(quartz)
 
 target_link_libraries("${PROJECT_NAME}" PRIVATE ${QT_MODULES})
 
-quartz_link("${PROJECT_NAME}" ICONS "info" "settings")
+quartz_link("${PROJECT_NAME}")

@@ -24,7 +24,7 @@ add_subdirectory(quartz)
 
 target_link_libraries("${PROJECT_NAME}" PRIVATE ${QT_MODULES})
 
-quartz_link("${PROJECT_NAME}" ALL_ICONS)
+quartz_link("${PROJECT_NAME}")
 
 # install
 install(TARGETS "${PROJECT_NAME}" RUNTIME)

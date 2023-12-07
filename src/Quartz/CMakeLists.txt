@@ -10,6 +10,8 @@ file(GLOB_RECURSE SRCS "./*.cpp")
 file(GLOB_RECURSE HDRS "./*.hpp")
 file(GLOB_RECURSE QMLS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "qml/*.qml")
 
+set_source_files_properties(qml/Icons.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+
 qt_add_library("${PROJECT_NAME}" STATIC)
 
 target_include_directories("${PROJECT_NAME}" PUBLIC ".")
@@ -19,62 +21,31 @@ target_link_libraries("${PROJECT_NAME}" PRIVATE ${QUARTZ_QT_MODULES})
 qt_add_qml_module("${PROJECT_NAME}" URI "Quartz" VERSION "${PROJECT_VERSION}" QML_FILES ${QMLS} SOURCES ${SRCS} ${HDRS})
 set_target_properties("${PROJECT_NAME}" PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--only-bytecode")
 
-# Bundle material design icons:
-# Optionally a list of icons can be passed after the target name. Otherwise all icons are bundled.
+# Bundle material design icons
 function(quartz_bundle_icons target)
 	include(FetchContent)
-	FetchContent_Declare(quartz_icons URL https://github.com/marella/material-symbols/archive/refs/tags/v0.14.1.tar.gz URL_HASH SHA256=e41d1e52939c7cf1af87fde1ea33d10994aaaa2eb2b93a8a568c9ef24d8bb3c2)
+
+	set(QUARTZ_ICONS_ARCHIVE "https://github.com/google/material-design-icons/raw/a90037f80d7db37279a7c1d863559e247ed81b05/variablefont")
+	set(QUARTZ_ICONS_NAME "MaterialSymbolsOutlined%5BFILL,GRAD,opsz,wght%5D")
+
+	FetchContent_Declare(quartz_icons URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.woff2" URL_HASH SHA256=9e97a755f27f4c31517494fc34142220865332de65b00f4dd62013b83fb1e44d DOWNLOAD_NO_EXTRACT ON)
 	FetchContent_MakeAvailable(quartz_icons)
+
+	FetchContent_Declare(quartz_codepoints URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.codepoints" URL_HASH SHA256=588edd648bbc6f0ce01351985f65f52178630180da7a03c5153c5638ce9f6fa7 DOWNLOAD_NO_EXTRACT ON)
+	FetchContent_MakeAvailable(quartz_codepoints)
 
 	# relative paths are required for QRC
 	cmake_path(RELATIVE_PATH quartz_icons_SOURCE_DIR)
+	set_source_files_properties("${quartz_icons_SOURCE_DIR}/${QUARTZ_ICONS_NAME}.woff2" PROPERTIES QT_RESOURCE_ALIAS "MaterialSymbols.woff2")
+	cmake_path(RELATIVE_PATH quartz_codepoints_SOURCE_DIR)
+	set_source_files_properties("${quartz_codepoints_SOURCE_DIR}/${QUARTZ_ICONS_NAME}.codepoints" PROPERTIES QT_RESOURCE_ALIAS "MaterialSymbols.codepoints")
 
-	if (NOT ARGN)
-		# bundle all icons
-		file(GLOB_RECURSE ARGN "${quartz_icons_SOURCE_DIR}/svg/500/outlined/*.svg")
-		list(TRANSFORM ARGN REPLACE "^.*/svg/500/outlined/(.*).svg$" "\\1")
-
-		if (NOT ARGN)
-			# icons already moved
-			file(GLOB_RECURSE ARGN "${CMAKE_BINARY_DIR}/icons-Debug-iphoneos/*.svg")
-			list(TRANSFORM ARGN REPLACE "^.*/icons-Debug-iphoneos/(.*)\.svg$" "\\1")
-		endif()
-	endif()
-
-	set(QUARTZ_ICONS_LIST "")
-	foreach(ICON IN LISTS ARGN)
-		# the cursed name "Debug-iphoneos" is only necessary to make qmlimportscanner skip this directory for performance reasons: https://code.qt.io/cgit/qt/qtdeclarative.git/tree/tools/qmlimportscanner/main.cpp?h=v6.6.1#n742
-		set(ICON_FILE "${CMAKE_BINARY_DIR}/icons-Debug-iphoneos/${ICON}.svg")
-
-		if (NOT EXISTS "${ICON_FILE}")
-			get_filename_component(ICON_DIR "${ICON_FILE}" DIRECTORY)
-			file(MAKE_DIRECTORY "${ICON_DIR}")
-			file(COPY_FILE "${quartz_icons_SOURCE_DIR}/svg/500/outlined/${ICON}.svg" "${ICON_FILE}" ONLY_IF_DIFFERENT)
-		endif()
-
-		list(APPEND QUARTZ_ICONS_LIST "${ICON_FILE}")
-		set_source_files_properties("${ICON_FILE}" PROPERTIES QT_RESOURCE_ALIAS "${ICON}")
-	endforeach()
-	# remove the bloated icons repository now, so that qmlimportscanner does not try to traverse it
-	file(REMOVE_RECURSE "${quartz_icons_SOURCE_DIR}")
-
-	qt_add_resources("${target}" QUARTZ_ICONS PREFIX "/svg" FILES ${QUARTZ_ICONS_LIST})
+	qt_add_resources("${target}" quartz_icons FILES "${quartz_icons_SOURCE_DIR}/${QUARTZ_ICONS_NAME}.woff2" "${quartz_codepoints_SOURCE_DIR}/${QUARTZ_ICONS_NAME}.codepoints")
 endfunction()
 
 function(quartz_link target)
 	target_link_libraries("${target}" PRIVATE quartz quartzplugin)
-
-	cmake_parse_arguments(QUARTZ_LINK "ALL_ICONS;INTERNAL_ICONS" "" "ICONS" ${ARGN})
-
-	if (QUARTZ_LINK_ALL_ICONS)
-		# bundle all icons
-		quartz_bundle_icons("${target}")
-	elseif (QUARTZ_LINK_ICONS OR QUARTZ_LINK_INTERNAL_ICONS)
-		# not bundling all icons, manually append icons that are needed by Quartz itself
-		list(APPEND QUARTZ_LINK_ICONS "close")
-		list(REMOVE_DUPLICATES QUARTZ_LINK_ICONS)
-		quartz_bundle_icons("${target}" ${QUARTZ_LINK_ICONS})
-	endif()
+	quartz_bundle_icons("${target}")
 endfunction()
 
 # install

@@ -2,19 +2,22 @@ import QtQuick
 import QtQuick.Controls.Material
 import Quartz
 
-ToolButton {
+Label {
 	property string name;
 	property int size: 24
-	property bool clickable: false
+	// variable font axes
+	property bool filled: false // range: {false, true}
+	property int weight: 400 // range: [100, 700]
+	property int grade: 0 // range: [-25, 200]
+	property int opticalSize: 24 // range: [20, 48]
 
-	hoverEnabled: clickable
-	focusPolicy: hoverEnabled ? Qt.StrongFocus : Qt.NoFocus
-	icon.source: "/svg/" + name
-	display: AbstractButton.IconOnly
-	icon.width: width
-	icon.height: height
-	implicitWidth: size
-	implicitHeight: implicitWidth
-	padding: 0
-	text: name
+	width: size
+	height: size
+	text: Codepoints.icon(name)
+	font.family: Icons.family
+	font.pixelSize: size
+	// TODO: Uncomment with Qt 6.7
+	// font.variableAxes: { "FILL": filled, "wght": weight, "GRAD": grade, "opsz": opticalSize }
+	horizontalAlignment: Text.AlignHCenter
+	verticalAlignment: Text.AlignVCenter
 }
