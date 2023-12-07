@@ -13,7 +13,9 @@ QString Codepoints::icon(QString name) {
 
 QList<QString> Codepoints::allIconNames() {
 	init();
-	return codepoints.keys();
+	auto res = codepoints.keys();
+	res.sort();
+	return res;
 }
 
 QString Codepoints::codepointToStr(const int32_t codepoint) {
