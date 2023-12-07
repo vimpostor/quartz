@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls.Material
 import QtQuick.Layouts
-import Qt.labs.folderlistmodel
 import Quartz
 
 Item {
