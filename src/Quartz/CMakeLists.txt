@@ -25,7 +25,7 @@ set_target_properties("${PROJECT_NAME}" PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--o
 function(quartz_bundle_icons target style)
 	include(FetchContent)
 
-	set(QUARTZ_ICONS_ARCHIVE "https://github.com/google/material-design-icons/raw/a90037f80d7db37279a7c1d863559e247ed81b05/variablefont")
+	set(QUARTZ_ICONS_ARCHIVE "https://github.com/google/material-design-icons/raw/70c7b5e1f68f9f92e4baf5d34b4b4a9ba590f4e9/variablefont")
 	set(QUARTZ_ICONS_NAME "MaterialSymbols${style}%5BFILL,GRAD,opsz,wght%5D")
 
 	FetchContent_Declare(quartz_icons URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.woff2" DOWNLOAD_NO_EXTRACT ON)
