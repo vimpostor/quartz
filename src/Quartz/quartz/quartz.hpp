@@ -3,6 +3,7 @@
 #include <QGuiApplication>
 
 #include "macros.hpp"
+#include "signals.hpp"
 #include "util.hpp"
 #include "version.hpp"
 
