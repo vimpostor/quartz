@@ -9,7 +9,7 @@
 
 namespace quartz {
 
-Signals::Signals(const std::initializer_list<int> &sigs, std::function<void(void)> callback) {
+Signals::Signals(const std::initializer_list<int> &sigs, std::function<void(int)> callback) {
 	this->callback = callback;
 	if (socketpair(AF_UNIX, SOCK_STREAM, 0, signal_fd)) {
 		std::cerr << "Could not create HUP socketpair" << std::endl;
@@ -19,18 +19,17 @@ Signals::Signals(const std::initializer_list<int> &sigs, std::function<void(void
 	setup_signal_handlers(sigs);
 }
 
-void Signals::handle_unix_signal(int) {
-	char a = 1;
+void Signals::handle_unix_signal(int sig) {
 	// only very few, async-signal-safe methods are allowed in the signal handler
-	std::ignore = write(signal_fd[0], &a, sizeof(a));
+	std::ignore = write(signal_fd[0], &sig, sizeof(sig));
 }
 
 void Signals::handle_qt_signal() {
 	sn->setEnabled(false);
-	char a;
-	std::ignore = read(signal_fd[1], &a, sizeof(a));
+	int sig;
+	std::ignore = read(signal_fd[1], &sig, sizeof(sig));
 
-	this->callback();
+	this->callback(sig);
 
 	sn->setEnabled(true);
 }

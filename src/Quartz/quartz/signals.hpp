@@ -11,10 +11,10 @@ namespace quartz {
 class Signals : public QObject {
 	Q_OBJECT
 public:
-	Signals(const std::initializer_list<int> &sigs, std::function<void(void)> callback);
+	Signals(const std::initializer_list<int> &sigs, std::function<void(int)> callback);
 
 	// Unix signal handler
-	static void handle_unix_signal(int);
+	static void handle_unix_signal(int sig);
 public slots:
 	// Qt signal handler
 	void handle_qt_signal();
@@ -23,7 +23,7 @@ private:
 
 	static inline int signal_fd[2];
 	QSocketNotifier *sn;
-	std::function<void(void)> callback;
+	std::function<void(int)> callback;
 };
 
 }
