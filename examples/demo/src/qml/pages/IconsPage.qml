@@ -6,13 +6,13 @@ import Quartz
 Item {
 	ColumnLayout {
 		anchors.fill: parent
+		anchors.margins: 8
 		spacing: 8
-		TextField {
+		Search {
 			id: search
+			placeholderText: "Search icons"
 			Layout.fillWidth: true
-			placeholderText: "Search"
 			focus: true
-			Material.containerStyle: Material.Filled
 		}
 		ListView {
 			clip: true
