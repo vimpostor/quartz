@@ -1,4 +1,3 @@
-import QtQuick.Controls
 import QtQuick.Controls.Material
 
 Pane {
