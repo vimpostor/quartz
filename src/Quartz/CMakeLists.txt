@@ -63,5 +63,8 @@ function(quartz_link target)
 	endif()
 endfunction()
 
-# install
-install(TARGETS "${PROJECT_NAME}")
+# install is currently broken, because QML modules cannot be installed systemwide in the filesystem
+# As a workaround, all projects should include this project with FetchContent, which builds it and statically links against it.
+# When QML modules get install support, we can uncomment this and start porting projects from FetchContent to native install.
+# Until then, the following line should stay commented as it would cause FetchContent projects to install libquartz systemwide, which clashes once we want to install more than one Quartz project on the system.
+# install(TARGETS "${PROJECT_NAME}")
