@@ -4,7 +4,7 @@ import QtQuick.Controls.Material
 import QtQuick.Controls.Material.impl
 
 FocusScope {
-	property alias placeholderText: search.placeholderText
+	property alias placeholderText: placeholder.text
 	property alias text: search.text
 	signal searched()
 
@@ -25,14 +25,21 @@ FocusScope {
 				Layout.alignment: Qt.AlignVCenter
 				onClicked: searched();
 			}
-			TextField {
+			TextInput {
 				id: search
 				Layout.alignment: Qt.AlignVCenter
 				Layout.fillWidth: true
 				font.pointSize: 16
-				background: Item {}
+				color: Material.foreground
 				focus: true
 				onAccepted: searched();
+				Label {
+					id: placeholder
+					anchors.fill: parent
+					visible: placeholderText && !parent.length
+					font.pointSize: 16
+					color: Material.hintTextColor
+				}
 			}
 		}
 	}
