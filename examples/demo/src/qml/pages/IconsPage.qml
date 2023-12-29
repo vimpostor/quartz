@@ -33,8 +33,7 @@ Item {
 				}
 				onClicked: {
 					Quartz.copyClipboard(icon.source);
-					snackbar.text = "Copied \"" + modelData + "\"";
-					snackbar.open();
+					snackbar.display("Copied \"" + modelData + "\"");
 				}
 				Icon {
 					anchors { verticalCenter: parent.verticalCenter; right: parent.right; margins: 32 }

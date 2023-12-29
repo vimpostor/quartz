@@ -9,6 +9,10 @@ Popup {
 	property alias timeout: closeTimer.interval
 	property alias dismissible: closeButton.visible
 	signal clicked()
+	function display(t) {
+		text = t;
+		open();
+	}
 
 	id: snackbarRoot
 	parent: Overlay.overlay

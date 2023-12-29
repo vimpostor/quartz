@@ -4,10 +4,7 @@ import Quartz
 
 DropArea {
 	anchors.fill: parent
-	onDropped: (drop) => {
-		snackbar.text = drop.urls[0];
-		snackbar.open();
-	}
+	onDropped: (drop) => snackbar.display(drop.urls[0]);
 	Snackbar {
 		id: snackbar
 	}
