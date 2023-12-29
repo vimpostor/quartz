@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Material
 import QtQuick.Controls.Material.impl
+import QtQuick.Templates as T
 
 FocusScope {
 	property alias placeholderText: placeholder.text
@@ -25,18 +26,19 @@ FocusScope {
 				Layout.alignment: Qt.AlignVCenter
 				onClicked: searched();
 			}
-			TextInput {
+			T.TextField {
 				id: search
 				Layout.alignment: Qt.AlignVCenter
 				Layout.fillWidth: true
-				font.pointSize: 16
+				implicitHeight: contentHeight
 				color: Material.foreground
+				font.pointSize: 16
 				focus: true
 				onAccepted: searched();
 				Label {
 					id: placeholder
 					anchors.fill: parent
-					visible: placeholderText && !parent.length
+					visible: !parent.length
 					font.pointSize: 16
 					color: Material.hintTextColor
 				}
