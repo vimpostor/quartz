@@ -10,7 +10,7 @@ function update_variant() {
 	sed -i "s#set(QUARTZ_ICONS_HASH .*) \# ${*}\$#set(QUARTZ_ICONS_HASH \"$(sha256sum "$CLONE/variablefont/MaterialSymbols$*[FILL,GRAD,opsz,wght].woff2" | cut -d' ' -f1)\") \# $*#" "$CMAKE"
 }
 
-git clone --depth 1 https://github.com/google/material-design-icons.git "$CLONE" || git -C "$CLONE" pull
+git -C "$CLONE" pull || git clone --depth 1 https://github.com/google/material-design-icons.git "$CLONE"
 
 # update URL
 sed -i "s#set(QUARTZ_ICONS_ARCHIVE .*)#set(QUARTZ_ICONS_ARCHIVE \"https://github.com/google/material-design-icons/raw/$(git -C "$CLONE" rev-parse HEAD)/variablefont\")#" "$CMAKE"
