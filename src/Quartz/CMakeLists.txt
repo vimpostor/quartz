@@ -30,9 +30,9 @@ function(quartz_bundle_icons target style)
 
 	set(QUARTZ_ICONS_HASH "7ef095754a4b53c9dce8a118033700ed023bcf93bf8ce534c397e3a158fbef14") # Outlined
 	if (style EQUAL "Rounded")
-		set(QUARTZ_ICONS_HASH "03b92c9792515abb32988d6437c30a9224f954c8beb8fd2f75e6b6fb6d448e87")
+		set(QUARTZ_ICONS_HASH "03b92c9792515abb32988d6437c30a9224f954c8beb8fd2f75e6b6fb6d448e87") # Rounded
 	elseif (style EQUAL "Sharp")
-		set(QUARTZ_ICONS_HASH "ed0c22ae86103c81c5fd11f92f47245ded0818d2755bc6d979bf4b72d20e1c49")
+		set(QUARTZ_ICONS_HASH "ed0c22ae86103c81c5fd11f92f47245ded0818d2755bc6d979bf4b72d20e1c49") # Sharp
 	endif()
 	FetchContent_Declare(quartz_icons URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.woff2" URL_HASH "SHA256=${QUARTZ_ICONS_HASH}" DOWNLOAD_NO_EXTRACT ON)
 	FetchContent_MakeAvailable(quartz_icons)
