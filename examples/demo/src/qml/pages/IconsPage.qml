@@ -32,7 +32,7 @@ Item {
 					}
 				}
 				onClicked: {
-					Quartz.copyClipboard(icon.source);
+					Quartz.copyClipboard(modelData);
 					snackbar.display("Copied \"" + modelData + "\"");
 				}
 				Icon {
