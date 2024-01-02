@@ -13,7 +13,7 @@ Item {
 			anchors.centerIn: parent
 		}
 	}
-	Ripple {
+	Wave {
 		anchors.fill: parent
 		centreX: mousearea.mouseX
 		centreY: mousearea.mouseY

@@ -10,7 +10,7 @@ DropArea {
 		mouseX = drag.x;
 		mouseY = drag.y;
 	}
-	Ripple {
+	Wave {
 		anchors.fill: parent
 		size: parent.containsDrag
 		centreX: parent.mouseX
