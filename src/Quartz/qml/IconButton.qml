@@ -5,13 +5,13 @@ import Quartz
 
 ToolButton {
 	id: root
-	property alias ico: ic
+	property alias ico: icon
 	padding: 0
-	implicitWidth: ic.size
+	implicitWidth: icon.size
 	implicitHeight: implicitWidth
 	contentItem: RowLayout {
 		Icon {
-			id: ic
+			id: icon
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 		}

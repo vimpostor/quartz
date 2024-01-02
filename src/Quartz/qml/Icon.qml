@@ -4,7 +4,7 @@ import Quartz
 
 Label {
 	property string name;
-	property int size: Math.max(Math.min(width, height), 24)
+	property int size: Math.max(Math.min(implicitWidth, implicitHeight), 24)
 	// variable font axes
 	property bool filled: false // range: {false, true}
 	property int weight: 400 // range: [100, 700]

@@ -1,4 +1,6 @@
+import QtQuick
 import QtQuick.Controls.Material
+import QtQuick.Layouts
 import Quartz
 
 Button {
@@ -11,15 +13,26 @@ Button {
 	property alias name: icon.name
 	property int size: FloatingActionButton.Size.Normal
 
-	width: size == FloatingActionButton.Size.Normal ? 56 : size == FloatingActionButton.Size.Small ? 40 : 96
-	height: width
+	width: text ? Math.max(80, implicitContentWidth + leftPadding + rightPadding) : height
+	height: size == FloatingActionButton.Size.Normal ? 56 : size == FloatingActionButton.Size.Small ? 40 : 96
 	highlighted: true
 	topInset: 0
 	bottomInset: 0
     Material.roundedScale: size == FloatingActionButton.Size.Normal ? Material.LargeScale : size == FloatingActionButton.Size.Small ? Material.MediumScale : Material.ExtraLargeScale
-	Icon {
-		id: icon
-		size: root.size == FloatingActionButton.Size.Normal ? 24 : root.size == FloatingActionButton.Size.Small ? 24 : 36
-		anchors.centerIn: parent
+	contentItem: RowLayout {
+		anchors.horizontalCenter: parent.horizontalCenter
+		height: root.size == FloatingActionButton.Size.Normal ? 24 : root.size == FloatingActionButton.Size.Small ? 24 : 36
+		spacing: 16
+		Icon {
+			id: icon
+			Layout.fillWidth: true
+			Layout.fillHeight: true
+		}
+		Label {
+			text: root.text
+			visible: root.text
+			Layout.fillHeight: true
+			verticalAlignment: Text.AlignVCenter
+		}
 	}
 }
