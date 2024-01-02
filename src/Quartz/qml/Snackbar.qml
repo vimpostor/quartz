@@ -71,10 +71,6 @@ Popup {
 			anchors.verticalCenter: parent.verticalCenter
 			onClicked: snackbarRoot.close();
 		}
-		Item {
-			width: 1
-			height: 1
-		}
 	}
 	Timer {
 		id: closeTimer

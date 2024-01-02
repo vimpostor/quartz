@@ -21,6 +21,10 @@ Button {
 	topInset: 0
 	bottomInset: 0
     Material.roundedScale: size == FloatingActionButton.Size.Normal ? Material.LargeScale : size == FloatingActionButton.Size.Small ? Material.MediumScale : Material.ExtraLargeScale
+	Material.elevation: 5 + (hovered || activeFocus) * 3 + down
+	Behavior on Material.elevation {
+		NumberAnimation { duration: 300; easing.type: Easing.OutCirc; }
+	}
 	contentItem: RowLayout {
 		anchors.horizontalCenter: parent.horizontalCenter
 		height: root.size == FloatingActionButton.Size.Normal ? 24 : root.size == FloatingActionButton.Size.Small ? 24 : 36

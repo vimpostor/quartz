@@ -9,7 +9,7 @@ Label {
 	property bool filled: false // range: {false, true}
 	property int weight: 400 // range: [100, 700]
 	property int grade: 0 // range: [-25, 200]
-	property int opticalSize: 24 // range: [20, 48]
+	property int opticalSize: Math.max(Math.min(size, 48), 20) // range: [20, 48]
 
 	width: size
 	height: size

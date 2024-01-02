@@ -13,7 +13,7 @@ QString Codepoints::icon(QString name) {
 	}
 
 #ifndef NDEBUG
-	std::cerr << "Icon " << name.toStdString() << " does not exist." << std::endl;
+	std::cerr << "Failed to find icon " << name.toStdString() << std::endl;
 #endif
 	return QString();
 }
