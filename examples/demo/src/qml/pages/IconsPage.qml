@@ -6,12 +6,13 @@ import Quartz
 Item {
 	ColumnLayout {
 		anchors.fill: parent
-		anchors.margins: 8
+		anchors.topMargin: 4
 		spacing: 8
 		Search {
 			id: search
 			placeholderText: "Search icons"
-			Layout.fillWidth: true
+			width: parent.width - 16
+			Layout.alignment: Qt.AlignHCenter
 			focus: true
 		}
 		ListView {

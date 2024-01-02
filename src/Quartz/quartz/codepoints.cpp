@@ -1,5 +1,9 @@
 #include "codepoints.hpp"
 
+#ifndef NDEBUG
+#include <iostream>
+#endif
+
 QString Codepoints::icon(QString name) {
 	// only load the codepoints file on demand on first access
 	init();
@@ -8,6 +12,9 @@ QString Codepoints::icon(QString name) {
 		return codepointToStr(codepoints.value(name));
 	}
 
+#ifndef NDEBUG
+	std::cerr << "Icon " << name.toStdString() << " does not exist." << std::endl;
+#endif
 	return QString();
 }
 
