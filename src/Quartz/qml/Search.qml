@@ -43,6 +43,13 @@ FocusScope {
 					color: Material.hintTextColor
 				}
 			}
+			IconButton {
+				ico.name: "close"
+				ico.size: 24
+				Layout.alignment: Qt.AlignVCenter
+				visible: search.text
+				onClicked: search.text = "";
+			}
 		}
 	}
 }
