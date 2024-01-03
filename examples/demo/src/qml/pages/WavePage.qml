@@ -3,7 +3,6 @@ import QtQuick.Controls.Material
 import Quartz
 
 Item {
-	anchors.fill: parent
 	Card {
 		width: parent.width / 4
 		height: width

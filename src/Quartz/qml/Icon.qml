@@ -13,6 +13,7 @@ Label {
 
 	width: size
 	height: size
+	visible: text
 	text: Codepoints.icon(name)
 	font.family: Icons.family
 	font.pixelSize: size

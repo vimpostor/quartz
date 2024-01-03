@@ -5,6 +5,10 @@
 #endif
 
 QString Codepoints::icon(QString name) {
+	if (name.isEmpty()) {
+		return name;
+	}
+
 	// only load the codepoints file on demand on first access
 	init();
 
