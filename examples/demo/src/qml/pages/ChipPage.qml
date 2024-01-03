@@ -15,7 +15,7 @@ Item {
 					text: "Estimate"
 				}
 				Chip {
-					leftIcoName: "directions_car"
+					leftIco.name: "directions_car"
 					text: "Directions"
 				}
 				Chip {
@@ -34,13 +34,13 @@ Item {
 				Chip {
 					type: Chip.Type.Filter
 					text: "Variable font"
-					leftIcoName: "brand_family"
+					leftIco.name: "brand_family"
 				}
 				Chip {
 					type: Chip.Type.Filter
 					text: "Serif"
-					leftIcoName: "check"
-					rightIcoName: "arrow_drop_down"
+					leftIco.name: "check"
+					rightIco.name: "arrow_drop_down"
 				}
 			}
 		}
@@ -55,13 +55,13 @@ Item {
 				Chip {
 					type: Chip.Type.Input
 					text: "Alice"
-					rightIcoName: "close"
+					rightIco.name: "close"
 				}
 				Chip {
 					type: Chip.Type.Input
 					text: "Bob"
 					imageSource: "https://m1.material.io/assets/0B5-3BCtasWxEV2R6bkNDOUxFZ00/style-icons-product-human-best-do1.png"
-					rightIcoName: "close"
+					rightIco.name: "close"
 				}
 			}
 		}
@@ -80,7 +80,7 @@ Item {
 				Chip {
 					type: Chip.Type.Suggestion
 					text: "Let's go!"
-					leftIcoName: "directions_car"
+					leftIco.name: "directions_car"
 				}
 			}
 		}

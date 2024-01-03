@@ -13,8 +13,8 @@ Button {
 		Suggestion
 	}
 	property int type: Chip.Type.Assist
-	property alias leftIcoName: leftIcon.name
-	property string rightIcoName
+	property alias leftIco: leftIcon
+	property alias rightIco: rightIcon.ico
 	property alias imageSource: img.source
 	signal rightIconClicked()
 
@@ -64,8 +64,8 @@ Button {
 			implicitWidth: 8
 		}
 		IconButton {
-			ico.name: rightIcoName
-			visible: rightIcoName.length
+			id: rightIcon
+			visible: ico.name.length
 			ico.size: 18
 			Layout.alignment: Qt.AlignVCenter
 			onClicked: root.rightIconClicked();
