@@ -8,10 +8,14 @@ Button {
 	property alias ico: icon
 	padding: 0
 	flat: true
-	implicitWidth: text ? (implicitContentWidth + leftPadding + rightPadding) : implicitHeight
+	implicitWidth: text ? (implicitContentWidth + leftPadding + rightPadding) : height
 	implicitHeight: icon.size + 24
 	topInset: 0
 	bottomInset: 0
+	topPadding: 0
+	bottomPadding: 0
+	leftPadding: 0
+	rightPadding: 0
 	contentItem: RowLayout {
 		spacing: 8
 		anchors.verticalCenter: parent.verticalCenter

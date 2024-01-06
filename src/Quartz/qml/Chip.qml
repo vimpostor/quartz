@@ -26,9 +26,12 @@ Button {
 	bottomInset: 0
 	leftPadding: type == Chip.Type.Input ? 4 : 8
 	rightPadding: 8
+	topPadding: 0
+	bottomPadding: 0
 	spacing: 0
 	contentItem: RowLayout {
-		anchors.verticalCenter: parent.verticalCenter
+		anchors.top: parent.top
+		anchors.bottom: parent.bottom
 		spacing: 0
 		Icon {
 			id: leftIcon
@@ -67,6 +70,7 @@ Button {
 			id: rightIcon
 			visible: ico.name.length
 			ico.size: 18
+			Layout.fillHeight: true
 			Layout.alignment: Qt.AlignVCenter
 			onClicked: root.rightIconClicked();
 		}
