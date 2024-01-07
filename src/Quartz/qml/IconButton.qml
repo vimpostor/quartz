@@ -29,6 +29,7 @@ Button {
 		Label {
 			text: root.text
 			visible: root.text
+			Layout.fillWidth: true
 			Layout.fillHeight: true
 			verticalAlignment: Text.AlignVCenter
 		}
