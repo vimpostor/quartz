@@ -17,7 +17,7 @@ Button {
 	rightPadding: 16
 	implicitWidth: text ? Math.max(80, implicitContentWidth + leftPadding + rightPadding) : height
 	implicitHeight: size == FloatingActionButton.Size.Normal ? 56 : size == FloatingActionButton.Size.Small ? 40 : 96
-	highlighted: true
+	highlighted: size != FloatingActionButton.Size.Small
 	topInset: 0
 	bottomInset: 0
     Material.roundedScale: size == FloatingActionButton.Size.Normal ? Material.LargeScale : size == FloatingActionButton.Size.Small ? Material.MediumScale : Material.ExtraLargeScale
