@@ -14,8 +14,8 @@ Button {
 	bottomInset: 0
 	topPadding: 0
 	bottomPadding: 0
-	leftPadding: 0
-	rightPadding: 0
+	leftPadding: text ? 16 : 0
+	rightPadding: leftPadding
 	contentItem: RowLayout {
 		spacing: 8
 		anchors.verticalCenter: parent.verticalCenter
@@ -23,7 +23,7 @@ Button {
 		Icon {
 			id: icon
 			size: 24
-			Layout.fillWidth: true
+			Layout.fillWidth: !root.text
 			Layout.fillHeight: true
 		}
 		Label {
