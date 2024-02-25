@@ -16,22 +16,27 @@ Button {
 	bottomPadding: 0
 	leftPadding: text ? 16 : 0
 	rightPadding: leftPadding
-	contentItem: RowLayout {
-		spacing: 8
-		anchors.verticalCenter: parent.verticalCenter
-		height: icon.size
-		Icon {
-			id: icon
-			size: 24
-			Layout.fillWidth: !root.text
-			Layout.fillHeight: true
-		}
-		Label {
-			text: root.text
-			visible: root.text
-			Layout.fillWidth: true
-			Layout.fillHeight: true
-			verticalAlignment: Text.AlignVCenter
+	contentItem: Item {
+		implicitWidth: layout.implicitWidth
+		RowLayout {
+			id: layout
+			spacing: 8
+			anchors.verticalCenter: parent.verticalCenter
+			anchors.horizontalCenter: parent.horizontalCenter
+			height: icon.size
+			Icon {
+				id: icon
+				size: 24
+				Layout.fillWidth: !root.text
+				Layout.fillHeight: true
+			}
+			Label {
+				text: root.text
+				visible: root.text
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+				verticalAlignment: Text.AlignVCenter
+			}
 		}
 	}
 }

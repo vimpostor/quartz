@@ -6,19 +6,19 @@ Item {
 	Column {
 		anchors.fill: parent
 		IconButton {
-			ico.name: "info"
+			ico.name: "list"
+			text: "Implicit width"
 		}
 		IconButton {
 			ico.name: "delete"
-			width: parent.width
-		}
-		IconButton {
-			ico.name: "robot"
-			text: "Implicit width"
 		}
 		IconButton {
 			ico.name: "list"
 			text: "Full width"
+			width: parent.width
+		}
+		IconButton {
+			ico.name: "delete"
 			width: parent.width
 		}
 	}
