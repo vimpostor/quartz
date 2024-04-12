@@ -17,8 +17,7 @@ Label {
 	text: Codepoints.icon(name)
 	font.family: Icons.family
 	font.pixelSize: size
-	// TODO: Uncomment with Qt 6.7
-	// font.variableAxes: { "FILL": filled, "wght": weight, "GRAD": grade, "opsz": opticalSize }
+	font.variableAxes: { "FILL": filled, "wght": weight, "GRAD": grade, "opsz": opticalSize }
 	renderType: Text.NativeRendering
 	horizontalAlignment: Text.AlignHCenter
 	verticalAlignment: Text.AlignVCenter
