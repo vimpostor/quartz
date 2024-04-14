@@ -25,23 +25,24 @@ Item {
 				component SliderDelegate: Item {
 					property alias text: label.text
 					property alias slider: slider
-					implicitHeight: label.implicitHeight
-					RowLayout {
-						anchors.fill: parent
-						anchors.leftMargin: 8
-						anchors.rightMargin: 8
+					implicitHeight: column.implicitHeight
+					Column {
+						id: column
+						anchors.left: parent.left
+						anchors.right: parent.right
 						Label {
 							id: label
 						}
 						Slider {
 							id: slider
-							Layout.fillWidth: true
+							width: parent.width
 							stepSize: 1
 						}
 					}
 				}
 				Column {
 					width: parent.width
+					spacing: 8
 					CheckDelegate {
 						id: filledDelegate
 						width: parent.width
