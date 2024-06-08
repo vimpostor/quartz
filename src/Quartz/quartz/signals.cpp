@@ -6,6 +6,7 @@
 #include <ranges>
 #include <signal.h>
 #include <sys/socket.h>
+#include <unistd.h>
 
 namespace quartz {
 
