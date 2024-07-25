@@ -13,11 +13,13 @@ QStringList prepend_args(int argc, char *argv[], const char *prepend) {
 	// start with the program name
 	QStringList result = {argv[0]};
 
-	// add prepend args
-	// just split prepend at every space for simplicity
-	// in theory we would need to do more advanced parsing, e.g. respect ""
-	for (const auto &word : std::views::split(std::string_view(prepend), " ")) {
-		result.push_back(QString::fromUtf8(word));
+	if (prepend) {
+		// add prepend args
+		// just split prepend at every space for simplicity
+		// in theory we would need to do more advanced parsing, e.g. respect ""
+		for (const auto &word : std::views::split(std::string_view(prepend), " ")) {
+			result.push_back(QString::fromUtf8(word));
+		}
 	}
 
 	// add the remaining args
