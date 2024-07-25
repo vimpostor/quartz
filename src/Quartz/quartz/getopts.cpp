@@ -17,7 +17,7 @@ QStringList prepend_args(int argc, char *argv[], const char *prepend) {
 		// add prepend args
 		// just split prepend at every space for simplicity
 		// in theory we would need to do more advanced parsing, e.g. respect ""
-		for (const auto &word : std::views::split(std::string_view(prepend), " ")) {
+		for (const auto &word : std::views::split(std::string_view(prepend), ' ')) {
 			result.push_back(QString::fromUtf8(word));
 		}
 	}
