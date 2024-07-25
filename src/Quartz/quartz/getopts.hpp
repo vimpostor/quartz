@@ -5,7 +5,6 @@
 namespace quartz {
 namespace getopts {
 
-QStringList prepend_args(int argc, char *argv[], char *prepend);
-
+QStringList prepend_args(int argc, char *argv[], const char *prepend);
 }
 }
