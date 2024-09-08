@@ -6,7 +6,7 @@
 
 	outputs = { self, nixpkgs }:
 	let eachSystem = with nixpkgs.lib; f: foldAttrs mergeAttrs {} (map (s: mapAttrs (_: v: { ${s} = v; }) (f s)) systems.flakeExposed);
-	in eachSystem (system:
+	in { lib = { inherit eachSystem; }; } // eachSystem (system:
 		let pkgs = nixpkgs.legacyPackages.${system}; in
 		{
 			packages = {
