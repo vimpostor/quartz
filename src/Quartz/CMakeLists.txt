@@ -37,7 +37,8 @@ function(quartz_bundle_icons target style)
 	FetchContent_Declare(quartz_icons URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.woff2" URL_HASH "SHA256=${QUARTZ_ICONS_HASH}" DOWNLOAD_NO_EXTRACT ON)
 	FetchContent_MakeAvailable(quartz_icons)
 
-	FetchContent_Declare(quartz_codepoints URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.codepoints" URL_HASH "SHA256=38a3da4dbc48fc5169d7b06fe346729aa05499081c818e5d04b716819f431b84" DOWNLOAD_NO_EXTRACT ON)
+	set(QUARTZ_ICONS_CODEPOINTS_HASH "38a3da4dbc48fc5169d7b06fe346729aa05499081c818e5d04b716819f431b84") # codepoints
+	FetchContent_Declare(quartz_codepoints URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.codepoints" URL_HASH "SHA256=${QUARTZ_ICONS_CODEPOINTS_HASH}" DOWNLOAD_NO_EXTRACT ON)
 	FetchContent_MakeAvailable(quartz_codepoints)
 
 	# relative paths are required for QRC

@@ -19,7 +19,7 @@ update_variant Outlined
 update_variant Rounded
 update_variant Sharp
 # update codepoints checksum
-sed -i "s#\(codepoints.*URL_HASH \"SHA256=\)[[:alnum:]]*#\1$(sha256sum "$CLONE/variablefont/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].codepoints" | cut -d' ' -f1)#" "$CMAKE"
+sed -i "s#set(QUARTZ_ICONS_CODEPOINTS_HASH .*) \# codepoints\$#set(QUARTZ_ICONS_CODEPOINTS_HASH \"$(sha256sum "$CLONE/variablefont/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].codepoints" | cut -d' ' -f1)\") \# codepoints#" "$CMAKE"
 
 git add "$CMAKE"
 git commit -m "Update icons" -m "Update material-design-icons to $(date --iso-8601 -d "@$(git -C "$CLONE" --no-pager log -1 --format="%ct" HEAD)")."
