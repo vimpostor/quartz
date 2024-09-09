@@ -6,6 +6,7 @@
 
 	outputs = { self, nixpkgs }:
 	let eachSystem = with nixpkgs.lib; f: foldAttrs mergeAttrs {} (map (s: mapAttrs (_: v: { ${s} = v; }) (f s)) systems.flakeExposed);
+	cmakeProjectVersion = c: builtins.head (builtins.match ".*project\\([[:alnum:]]+ VERSION ([0-9]+\.[0-9]+).*" (builtins.readFile c));
 	iconResource = p: s: t: p.stdenv.mkDerivation rec {
 		name = "quartzIcons" + t;
 		fetchurl = builtins.head (builtins.match ".*set\\(QUARTZ_ICONS_ARCHIVE \"([[:alnum:]:/\.-]+)\"\\).*" (builtins.readFile ./src/Quartz/CMakeLists.txt)) + "/MaterialSymbols" + s + "%5BFILL,GRAD,opsz,wght%5D." + t;
@@ -20,9 +21,9 @@
 	in {
 		lib = rec {
 			inherit eachSystem;
+			inherit cmakeProjectVersion;
 			cmakeFlags = { pkgs, icons ? true, iconStyle ? "Outlined"}: nixpkgs.lib.take (if icons then 3 else 1) [("-DFETCHCONTENT_SOURCE_DIR_QUARTZ=" + ./.) ("-DFETCHCONTENT_SOURCE_DIR_QUARTZ_ICONS=" + iconResource pkgs iconStyle "woff2") ("-DFETCHCONTENT_SOURCE_DIR_QUARTZ_CODEPOINTS=" + iconResource pkgs iconStyle "codepoints")]; # patch fetchcontent to work with Nix
 			cmakeWrapper = { pkgs, cmakeFile }: cmakeFlags { inherit pkgs; icons = isNull (builtins.match ".*quartz_link\\([^\n]*NO_ICONS.*" (builtins.readFile cmakeFile)); iconStyle = let m = builtins.match ".*quartz_link\\([^\n]*ICON_STYLE \"?(Outlined|Rounded|Sharp).*" (builtins.readFile cmakeFile); in if isNull m then "Outlined" else builtins.head (m ++ ["Outlined"]); };
-			cmakeProjectVersion = c: builtins.head (builtins.match ".*project\\([[:alnum:]]+ VERSION ([0-9]+\.[0-9]+).*" (builtins.readFile c));
 		};
 	} // eachSystem (system:
 		let pkgs = nixpkgs.legacyPackages.${system}; in
@@ -30,7 +31,7 @@
 			packages = {
 				default = pkgs.stdenv.mkDerivation {
 					pname = "quartz";
-					version = builtins.head (builtins.match ".*project\\([[:alnum:]]+ VERSION ([0-9]+\.[0-9]+).*" (builtins.readFile ./CMakeLists.txt));
+					version = cmakeProjectVersion ./CMakeLists.txt;
 
 					src = ./.;
 
