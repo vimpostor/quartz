@@ -22,6 +22,7 @@
 			inherit eachSystem;
 			cmakeFlags = { pkgs, icons ? true, iconStyle ? "Outlined"}: nixpkgs.lib.take (if icons then 3 else 1) [("-DFETCHCONTENT_SOURCE_DIR_QUARTZ=" + ./.) ("-DFETCHCONTENT_SOURCE_DIR_QUARTZ_ICONS=" + iconResource pkgs iconStyle "woff2") ("-DFETCHCONTENT_SOURCE_DIR_QUARTZ_CODEPOINTS=" + iconResource pkgs iconStyle "codepoints")]; # patch fetchcontent to work with Nix
 			cmakeWrapper = { pkgs, cmakeFile }: cmakeFlags { inherit pkgs; icons = isNull (builtins.match ".*quartz_link\\([^\n]*NO_ICONS.*" (builtins.readFile cmakeFile)); iconStyle = let m = builtins.match ".*quartz_link\\([^\n]*ICON_STYLE \"?(Outlined|Rounded|Sharp).*" (builtins.readFile cmakeFile); in if isNull m then "Outlined" else builtins.head (m ++ ["Outlined"]); };
+			cmakeProjectVersion = c: builtins.head (builtins.match ".*project\\([[:alnum:]]+ VERSION ([0-9]+\.[0-9]+).*" (builtins.readFile c));
 		};
 	} // eachSystem (system:
 		let pkgs = nixpkgs.legacyPackages.${system}; in
