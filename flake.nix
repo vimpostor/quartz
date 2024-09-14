@@ -20,10 +20,10 @@
 	};
 	in {
 		lib = rec {
-			inherit eachSystem;
-			inherit cmakeProjectVersion;
+			inherit eachSystem; # wrap attrset for all systems
+			inherit cmakeProjectVersion; # deduce version based on CMakeLists.txt
 			cmakeFlags = { pkgs, icons ? true, iconStyle ? "Outlined"}: nixpkgs.lib.take (if icons then 3 else 1) [("-DFETCHCONTENT_SOURCE_DIR_QUARTZ=" + ./.) ("-DFETCHCONTENT_SOURCE_DIR_QUARTZ_ICONS=" + iconResource pkgs iconStyle "woff2") ("-DFETCHCONTENT_SOURCE_DIR_QUARTZ_CODEPOINTS=" + iconResource pkgs iconStyle "codepoints")]; # patch fetchcontent to work with Nix
-			cmakeWrapper = { pkgs, cmakeFile }: cmakeFlags { inherit pkgs; icons = isNull (builtins.match ".*quartz_link\\([^\n]*NO_ICONS.*" (builtins.readFile cmakeFile)); iconStyle = let m = builtins.match ".*quartz_link\\([^\n]*ICON_STYLE \"?(Outlined|Rounded|Sharp).*" (builtins.readFile cmakeFile); in if isNull m then "Outlined" else builtins.head (m ++ ["Outlined"]); };
+			cmakeWrapper = { pkgs, cmakeFile }: cmakeFlags { inherit pkgs; icons = isNull (builtins.match ".*quartz_link\\([^\n]*NO_ICONS.*" (builtins.readFile cmakeFile)); iconStyle = let m = builtins.match ".*quartz_link\\([^\n]*ICON_STYLE \"?(Outlined|Rounded|Sharp).*" (builtins.readFile cmakeFile); in if isNull m then "Outlined" else builtins.head (m ++ ["Outlined"]); }; # automatically call cmakeFlags based on CMakeLists.txt
 		};
 	} // eachSystem (system:
 		let pkgs = nixpkgs.legacyPackages.${system}; in
