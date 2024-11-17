@@ -8,9 +8,9 @@ add_compile_definitions(QUARTZ_VERSION="${PROJECT_VERSION}")
 
 file(GLOB_RECURSE SRCS "./*.cpp")
 file(GLOB_RECURSE HDRS "./*.hpp")
-file(GLOB_RECURSE QMLS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "qml/*.qml")
+file(GLOB_RECURSE QMLS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.qml")
 
-set_source_files_properties(qml/Icons.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+set_source_files_properties(Icons.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
 qt_add_library("${PROJECT_NAME}" STATIC)
 
