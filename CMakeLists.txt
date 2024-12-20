@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.31)
-project(quartz VERSION 0.8 DESCRIPTION "A modern Qt Quick library")
+project(quartz VERSION 0.9 DESCRIPTION "A modern Qt Quick library")
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
