@@ -47,6 +47,8 @@ Button {
 			layer.enabled: visible
 			layer.effect: MultiEffect {
 				maskEnabled: true
+				maskThresholdMin: 0.5
+				maskSpreadAtMin: 1.0
 				maskSource: ShaderEffectSource {
 					sourceItem: Rectangle {
 						width: 24
