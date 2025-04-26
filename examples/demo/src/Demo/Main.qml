@@ -14,9 +14,9 @@ ApplicationWindow {
 	Material.theme: Material.System
 	FolderListModel {
 		id: pagesmodel
-		folder: "qrc:/src/qml/pages"
+		folder: "qrc:/qt/qml/Demo/pages"
 		showDirs: false
-		nameFilters: "*Page.qml"
+		nameFilters: ["*Page.qml"]
 		onStatusChanged: {
 			if (status == FolderListModel.Ready) {
 				tabbar.currentIndex = settings.currentTab;
@@ -39,7 +39,7 @@ ApplicationWindow {
 		id: pageloader
 		focus: true
 		anchors { top: tabbar.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
-		source: pagesmodel.status == FolderListModel.Ready ? "qrc:/src/qml/pages/" + pagesmodel.get(tabbar.currentIndex, "fileName") : ""
+		source: pagesmodel.status == FolderListModel.Ready ? "pages/" + pagesmodel.get(tabbar.currentIndex, "fileName") : ""
 	}
 	Settings {
 		id: settings

@@ -1,5 +1,5 @@
 list(APPEND QUARTZ_QT_MODULES Core Qml Quick QuickControls2)
-find_package(Qt6 6.8 COMPONENTS ${QUARTZ_QT_MODULES} REQUIRED)
+find_package(Qt6 6.9 COMPONENTS ${QUARTZ_QT_MODULES} REQUIRED)
 qt_standard_project_setup()
 list(TRANSFORM QUARTZ_QT_MODULES PREPEND "Qt6::")
 qt_policy(SET QTP0001 NEW)

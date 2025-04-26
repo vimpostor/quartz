@@ -10,7 +10,6 @@ int main(int argc, char *argv[]) {
 	std::cout << "Using quartz version " << quartz::version::version_string() << std::endl;
 
 	QQmlApplicationEngine engine;
-	engine.addImportPath(QStringLiteral(":/"));
 
 	engine.loadFromModule("FetchContent", "Main");
 	if (engine.rootObjects().isEmpty()) {
