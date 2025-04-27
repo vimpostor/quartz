@@ -1,1 +1,1 @@
-add_subdirectory(Quartz)
+add_subdirectory(qml/Quartz)
