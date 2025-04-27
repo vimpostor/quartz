@@ -1,6 +1,6 @@
 list(APPEND QT_MODULES Core Qml Quick QuickControls2)
 find_package(Qt6 6.9 COMPONENTS ${QT_MODULES} REQUIRED)
-qt_standard_project_setup(REQUIRES 6.9)
+qt_standard_project_setup(REQUIRES ${Qt6_VERSION})
 list(TRANSFORM QT_MODULES PREPEND "Qt6::")
 
 file(GLOB_RECURSE SRCS "*.cpp")
