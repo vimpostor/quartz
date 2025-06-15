@@ -5,9 +5,8 @@ import Qt.labs.folderlistmodel
 import Quartz
 import Demo
 
-ApplicationWindow {
+AppWindow {
 	id: root
-	visible: true
 	title: "Demo"
 	width: 800
 	height: 600
