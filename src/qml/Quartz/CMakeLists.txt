@@ -64,6 +64,15 @@ function(quartz_link target)
 	endif()
 endfunction()
 
+function(quartz_bundle_android_openssl target)
+	if (ANDROID)
+		FetchContent_Declare(android_openssl URL https://github.com/kdab/android_openssl/archive/refs/heads/master.zip)
+		FetchContent_MakeAvailable(android_openssl)
+		include(${android_openssl_SOURCE_DIR}/android_openssl.cmake)
+		add_android_openssl_libraries("${target}")
+	endif()
+endfunction()
+
 # install is currently broken, because QML modules cannot be installed systemwide in the filesystem
 # As a workaround, all projects should include this project with FetchContent, which builds it and statically links against it.
 # When QML modules get install support, we can uncomment this and start porting projects from FetchContent to native install.
