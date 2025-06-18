@@ -73,6 +73,19 @@ function(quartz_bundle_android_openssl target)
 	endif()
 endfunction()
 
+function(quartz_generate_android_icons target)
+	if (ANDROID)
+		list(APPEND ICON_COMMANDS COMMAND "sh" "-c" "mkdir -p ${CMAKE_BINARY_DIR}/android/res/drawable-\\{l,m,h,xh,xxh,xxxh\\}dpi")
+		list(APPEND ICON_COMMANDS COMMAND "magick" "${CMAKE_SOURCE_DIR}/assets/${target}.svg" "-resize" "36x36" "${CMAKE_BINARY_DIR}/android/res/drawable-ldpi/${target}.png")
+		list(APPEND ICON_COMMANDS COMMAND "magick" "${CMAKE_SOURCE_DIR}/assets/${target}.svg" "-resize" "48x48" "${CMAKE_BINARY_DIR}/android/res/drawable-mdpi/${target}.png")
+		list(APPEND ICON_COMMANDS COMMAND "magick" "${CMAKE_SOURCE_DIR}/assets/${target}.svg" "-resize" "72x72" "${CMAKE_BINARY_DIR}/android/res/drawable-hdpi/${target}.png")
+		list(APPEND ICON_COMMANDS COMMAND "magick" "${CMAKE_SOURCE_DIR}/assets/${target}.svg" "-resize" "96x96" "${CMAKE_BINARY_DIR}/android/res/drawable-xhdpi/${target}.png")
+		list(APPEND ICON_COMMANDS COMMAND "magick" "${CMAKE_SOURCE_DIR}/assets/${target}.svg" "-resize" "144x144" "${CMAKE_BINARY_DIR}/android/res/drawable-xxhdpi/${target}.png")
+		list(APPEND ICON_COMMANDS COMMAND "magick" "${CMAKE_SOURCE_DIR}/assets/${target}.svg" "-resize" "192x192" "${CMAKE_BINARY_DIR}/android/res/drawable-xxxhdpi/${target}.png")
+		add_custom_target(android-integration ${ICON_COMMANDS})
+	endif()
+endfunction()
+
 # install is currently broken, because QML modules cannot be installed systemwide in the filesystem
 # As a workaround, all projects should include this project with FetchContent, which builds it and statically links against it.
 # When QML modules get install support, we can uncomment this and start porting projects from FetchContent to native install.
