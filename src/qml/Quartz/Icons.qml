@@ -7,5 +7,5 @@ FontLoader {
 	// convenience alias
 	readonly property alias family: root.font.family
 
-	source: "/MaterialSymbols.woff2"
+	source: "/MaterialSymbols.ttf"
 }

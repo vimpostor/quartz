@@ -3,11 +3,11 @@
 set -eE
 
 CLONE="$HOME/.cache/material-design-icons"
-CMAKE="src/Quartz/CMakeLists.txt"
+CMAKE="src/qml/Quartz/CMakeLists.txt"
 
 # takes the variant name as only parameter
 function update_variant() {
-	sed -i "s#set(QUARTZ_ICONS_HASH .*) \# ${*}\$#set(QUARTZ_ICONS_HASH \"$(sha256sum "$CLONE/variablefont/MaterialSymbols$*[FILL,GRAD,opsz,wght].woff2" | cut -d' ' -f1)\") \# $*#" "$CMAKE"
+	sed -i "s#set(QUARTZ_ICONS_HASH .*) \# ${*}\$#set(QUARTZ_ICONS_HASH \"$(sha256sum "$CLONE/variablefont/MaterialSymbols$*[FILL,GRAD,opsz,wght].ttf" | cut -d' ' -f1)\") \# $*#" "$CMAKE"
 }
 
 git -C "$CLONE" pull || git clone --depth 1 https://github.com/google/material-design-icons.git "$CLONE"

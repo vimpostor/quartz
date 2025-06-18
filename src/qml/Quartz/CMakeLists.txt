@@ -26,14 +26,15 @@ function(quartz_bundle_icons target style)
 
 	set(QUARTZ_ICONS_ARCHIVE "https://github.com/google/material-design-icons/raw/941fa95d7f6084a599a54ca71bc565f48e7c6d9e/variablefont")
 	set(QUARTZ_ICONS_NAME "MaterialSymbols${style}%5BFILL,GRAD,opsz,wght%5D")
+	set(QUARTZ_ICONS_TYPE "ttf")
 
-	set(QUARTZ_ICONS_HASH "0c1e0c902abad476b6d0f6e9e79ede0a9d71d20ab5fee46e54c805c81a08426d") # Outlined
+	set(QUARTZ_ICONS_HASH "396974c0c6367d3fb7bdf66fed1372c6b05a48a23e48bc4f48919c66184fe011") # Outlined
 	if (style EQUAL "Rounded")
-		set(QUARTZ_ICONS_HASH "172088f4e01c3abdf9b73e5d23f1054aa5de90a7ec6b522b8661d07ecc366507") # Rounded
+		set(QUARTZ_ICONS_HASH "4b7a9c0647fabf1ef8f109b88e4eef393c0018e72957a655c4b690c298bf565c") # Rounded
 	elseif (style EQUAL "Sharp")
-		set(QUARTZ_ICONS_HASH "a634f619255f6c1b4c53b4b3f4c4f46d67e4e49787c2021866eb90a15ab315e7") # Sharp
+		set(QUARTZ_ICONS_HASH "7ea86a158253c9b0a13ebf209bc9524faf4a6561a2fec4b7a022972b73fe37b1") # Sharp
 	endif()
-	FetchContent_Declare(quartz_icons URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.woff2" URL_HASH "SHA256=${QUARTZ_ICONS_HASH}" DOWNLOAD_NO_EXTRACT ON)
+	FetchContent_Declare(quartz_icons URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.${QUARTZ_ICONS_TYPE}" URL_HASH "SHA256=${QUARTZ_ICONS_HASH}" DOWNLOAD_NO_EXTRACT ON)
 	FetchContent_MakeAvailable(quartz_icons)
 
 	set(QUARTZ_ICONS_CODEPOINTS_HASH "a485bcf86b9e5bcba43aa2783d5bdefce19f4640e5fc4e1332f687cb86192a1e") # codepoints
@@ -42,11 +43,11 @@ function(quartz_bundle_icons target style)
 
 	# relative paths are required for QRC
 	cmake_path(RELATIVE_PATH quartz_icons_SOURCE_DIR)
-	set_source_files_properties("${quartz_icons_SOURCE_DIR}/${QUARTZ_ICONS_NAME}.woff2" PROPERTIES QT_RESOURCE_ALIAS "MaterialSymbols.woff2")
+	set_source_files_properties("${quartz_icons_SOURCE_DIR}/${QUARTZ_ICONS_NAME}.${QUARTZ_ICONS_TYPE}" PROPERTIES QT_RESOURCE_ALIAS "MaterialSymbols.${QUARTZ_ICONS_TYPE}")
 	cmake_path(RELATIVE_PATH quartz_codepoints_SOURCE_DIR)
 	set_source_files_properties("${quartz_codepoints_SOURCE_DIR}/${QUARTZ_ICONS_NAME}.codepoints" PROPERTIES QT_RESOURCE_ALIAS "MaterialSymbols.codepoints")
 
-	qt_add_resources("${target}" quartz_icons FILES "${quartz_icons_SOURCE_DIR}/${QUARTZ_ICONS_NAME}.woff2" "${quartz_codepoints_SOURCE_DIR}/${QUARTZ_ICONS_NAME}.codepoints")
+	qt_add_resources("${target}" quartz_icons FILES "${quartz_icons_SOURCE_DIR}/${QUARTZ_ICONS_NAME}.${QUARTZ_ICONS_TYPE}" "${quartz_codepoints_SOURCE_DIR}/${QUARTZ_ICONS_NAME}.codepoints")
 endfunction()
 
 function(quartz_link target)
