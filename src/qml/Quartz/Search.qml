@@ -30,7 +30,8 @@ FocusScope {
 				id: search
 				Layout.alignment: Qt.AlignVCenter
 				Layout.fillWidth: true
-				implicitHeight: contentHeight
+				Layout.fillHeight: true
+				verticalAlignment: Text.AlignVCenter
 				color: Material.foreground
 				font.pointSize: 16
 				focus: true
@@ -38,6 +39,7 @@ FocusScope {
 				Label {
 					id: placeholder
 					anchors.fill: parent
+					verticalAlignment: Text.AlignVCenter
 					visible: !parent.length
 					font.pointSize: 16
 					color: Material.hintTextColor
@@ -47,8 +49,15 @@ FocusScope {
 				ico.name: "close"
 				ico.size: 24
 				Layout.alignment: Qt.AlignVCenter
-				visible: search.text
+				visible: opacity
+				opacity: !!search.text
 				onClicked: search.text = "";
+				Behavior on opacity {
+					NumberAnimation {
+						easing.type: Easing.OutCirc
+						duration: 200
+					}
+				}
 			}
 		}
 	}
