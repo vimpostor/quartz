@@ -11,6 +11,8 @@ Item {
 			anchors { left: parent.left; right: parent.right }
 			title: "Assist chips"
 			ChipFlow {
+				anchors.left: parent.left
+				anchors.right: parent.right
 				Chip {
 					text: "Estimate"
 				}
@@ -27,6 +29,8 @@ Item {
 			anchors { left: parent.left; right: parent.right }
 			title: "Filter chips"
 			ChipFlow {
+				anchors.left: parent.left
+				anchors.right: parent.right
 				Chip {
 					type: Chip.Type.Filter
 					text: "Sans"
@@ -48,6 +52,8 @@ Item {
 			anchors { left: parent.left; right: parent.right }
 			title: "Input chips"
 			ChipFlow {
+				anchors.left: parent.left
+				anchors.right: parent.right
 				Chip {
 					type: Chip.Type.Input
 					text: "John"
@@ -69,6 +75,8 @@ Item {
 			anchors { left: parent.left; right: parent.right }
 			title: "Suggestion chips"
 			ChipFlow {
+				anchors.left: parent.left
+				anchors.right: parent.right
 				Chip {
 					type: Chip.Type.Suggestion
 					text: "Yes!"

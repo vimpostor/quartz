@@ -8,8 +8,6 @@ Flickable {
 
 	default property alias data: flow.data
 	interactive: !wrap
-	anchors.left: parent.left
-	anchors.right: parent.right
 	implicitHeight: contentHeight
 	contentWidth: wrap ? parent.width : flow.implicitWidth
 	contentHeight: flow.implicitHeight
