@@ -29,6 +29,9 @@ Button {
 	topPadding: 0
 	bottomPadding: 0
 	spacing: 0
+	Behavior on implicitWidth {
+		NumberAnimation { duration: 300; easing.type: Easing.OutCirc; }
+	}
 	contentItem: RowLayout {
 		anchors.top: parent.top
 		anchors.bottom: parent.bottom
