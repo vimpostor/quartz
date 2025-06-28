@@ -92,5 +92,17 @@ Item {
 				}
 			}
 		}
+		GroupBox {
+			anchors { left: parent.left; right: parent.right }
+			title: "Custom chips"
+			ChipFlow {
+				anchors.left: parent.left
+				anchors.right: parent.right
+				ComboChip {
+					category: "Style"
+					model: ["Outlined", "Rounded", "Sharp"]
+				}
+			}
+		}
 	}
 }
