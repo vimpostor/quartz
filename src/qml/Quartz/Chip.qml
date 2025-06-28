@@ -19,7 +19,8 @@ Button {
 	signal rightIconClicked()
 
 	height: 32
-    Material.roundedScale: Material.SmallScale
+	Material.roundedScale: Material.SmallScale
+	Material.accent: Material.Grey
 	flat: true
 	highlighted: true
 	topInset: 0
