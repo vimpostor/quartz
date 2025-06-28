@@ -2,6 +2,7 @@ import QtQuick.Controls.Material
 import Quartz
 
 Chip {
+	id: root
 	property alias model: combo.model
 	property string category
 
@@ -16,7 +17,7 @@ Chip {
 		property int lastIndex: -1
 		visible: false
 		currentIndex: -1
-		Material.accent: parent.parent.Material.accent
+		Material.accent: root.parent.Material.accent
 		onActivated: (i) => {
 			if (i == lastIndex) {
 				currentIndex = -1
