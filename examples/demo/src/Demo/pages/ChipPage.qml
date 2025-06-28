@@ -102,6 +102,9 @@ Item {
 					category: "Style"
 					model: ["Outlined", "Rounded", "Sharp"]
 				}
+				CheckChip {
+					text: "Filter"
+				}
 			}
 		}
 	}
