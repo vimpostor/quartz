@@ -16,6 +16,7 @@ Chip {
 		property int lastIndex: -1
 		visible: false
 		currentIndex: -1
+		Material.accent: parent.parent.Material.accent
 		onActivated: (i) => {
 			if (i == lastIndex) {
 				currentIndex = -1
