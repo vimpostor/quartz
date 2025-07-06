@@ -3,8 +3,9 @@ import Quartz
 
 Chip {
 	id: root
-	property alias model: combo.model
 	property string category
+	property alias model: combo.model
+	property alias currentIndex: combo.currentIndex
 
 	type: Chip.Type.Filter
 	text: combo.currentIndex + 1 ? combo.currentText : category
