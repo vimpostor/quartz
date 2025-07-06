@@ -6,12 +6,12 @@ Chip {
 	property string category
 	property alias model: combo.model
 	property alias currentIndex: combo.currentIndex
-	property bool isSelected: currentIndex + 1
-	property string selectedText: isSelected ? combo.currentText : ""
+	property string selectedText: checked ? combo.currentText : ""
 
 	type: Chip.Type.Filter
-	text: isSelected ? selectedText : category
-	leftIco.name: isSelected ? "check" : ""
+	checked: currentIndex + 1
+	text: checked ? selectedText : category
+	leftIco.name: checked ? "check" : ""
 	rightIco.name: "arrow_drop_down"
 	onClicked: combo.popup.open()
 	onRightIconClicked: combo.popup.open()
