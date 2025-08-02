@@ -93,6 +93,11 @@ function(quartz_generate_launcher_icons target)
 	add_custom_target(icon-integration ${ICON_COMMANDS})
 endfunction()
 
+function(quartz_generate_desktop_file target categories)
+	file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.desktop" CONTENT "#!/usr/bin/env xdg-open\n[Desktop Entry]\nType=Application\nName=@PROJECT_NAME@\nComment=@PROJECT_DESCRIPTION@\nExec=@target@\nTerminal=false\nCategories=@categories@\nIcon=@target@" @ONLY NEWLINE_STYLE UNIX)
+	install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.desktop" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
+endfunction()
+
 # install is currently broken, because QML modules cannot be installed systemwide in the filesystem
 # As a workaround, all projects should include this project with FetchContent, which builds it and statically links against it.
 # When QML modules get install support, we can uncomment this and start porting projects from FetchContent to native install.
