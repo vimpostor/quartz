@@ -94,7 +94,11 @@ function(quartz_generate_launcher_icons target)
 endfunction()
 
 function(quartz_generate_desktop_file target categories)
-	file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.desktop" CONTENT "#!/usr/bin/env xdg-open\n[Desktop Entry]\nType=Application\nName=@PROJECT_NAME@\nComment=@PROJECT_DESCRIPTION@\nExec=@target@\nTerminal=false\nCategories=@categories@\nIcon=@target@" @ONLY NEWLINE_STYLE UNIX)
+	string(SUBSTRING "${target}" 0 1 FIRST_LETTER)
+	string(TOUPPER "${FIRST_LETTER}" FIRST_LETTER)
+	string(SUBSTRING "${target}" 1 -1 REST_LETTER)
+	string(APPEND PROJECT_NAME_CAPITALIZED "${FIRST_LETTER}${REST_LETTER}")
+	file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.desktop" CONTENT "#!/usr/bin/env xdg-open\n[Desktop Entry]\nType=Application\nName=@PROJECT_NAME_CAPITALIZED@\nComment=@PROJECT_DESCRIPTION@\nExec=@target@\nTerminal=false\nCategories=@categories@\nIcon=@target@" @ONLY NEWLINE_STYLE UNIX)
 	install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.desktop" DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
 endfunction()
 
