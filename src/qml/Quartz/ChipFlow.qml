@@ -6,7 +6,7 @@ Flickable {
 	id: root
 	property bool wrap: true
 
-	default property alias data: flow.data
+	default property alias flowdata: flow.data
 	interactive: !wrap
 	implicitHeight: contentHeight
 	contentWidth: wrap ? parent.width : flow.implicitWidth

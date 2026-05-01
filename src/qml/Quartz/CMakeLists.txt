@@ -1,5 +1,5 @@
 list(APPEND QUARTZ_QT_MODULES Core Qml Quick QuickControls2)
-find_package(Qt6 6.10 COMPONENTS ${QUARTZ_QT_MODULES} REQUIRED)
+find_package(Qt6 6.11 COMPONENTS ${QUARTZ_QT_MODULES} REQUIRED)
 qt_standard_project_setup(REQUIRES ${Qt6_VERSION})
 list(TRANSFORM QUARTZ_QT_MODULES PREPEND "Qt6::")
 
@@ -24,20 +24,20 @@ set_target_properties("${PROJECT_NAME}" PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--o
 function(quartz_bundle_icons target style)
 	include(FetchContent)
 
-	set(QUARTZ_ICONS_ARCHIVE "https://github.com/google/material-design-icons/raw/bb04090f930e272697f2a1f0d7b352d92dfeee43/variablefont")
+	set(QUARTZ_ICONS_ARCHIVE "https://github.com/google/material-design-icons/raw/481507587f1bdfe712939398c4dc0ecc2079ea7c/variablefont")
 	set(QUARTZ_ICONS_NAME "MaterialSymbols${style}%5BFILL,GRAD,opsz,wght%5D")
 	set(QUARTZ_ICONS_TYPE "ttf")
 
-	set(QUARTZ_ICONS_HASH "fb0d00bfa03507fe6712348604aea33741b41f97643e109ad4e582b1a15865b9") # Outlined
+	set(QUARTZ_ICONS_HASH "d7bf8250a14168acddf65ac9e75a2c9c2e8df5e10119560828698728eb12d917") # Outlined
 	if (style EQUAL "Rounded")
-		set(QUARTZ_ICONS_HASH "d719f22fdee27e344b07e46e6fa8b50b1fce3cfcb03d4a84f03fafbf0812fc22") # Rounded
+		set(QUARTZ_ICONS_HASH "8a80aaeaabf58ee64face224cb4ff56f756e7581f656b9ceff27918218408f25") # Rounded
 	elseif (style EQUAL "Sharp")
-		set(QUARTZ_ICONS_HASH "e76edbb72b8cbca2380c507cd17ea5cb4023cf3e01a9dcfeddd670da8c495f37") # Sharp
+		set(QUARTZ_ICONS_HASH "e812489e2e2101bcb5fedb93075a2cfe2528d36b8c00456f15fa3050e2aca9b8") # Sharp
 	endif()
 	FetchContent_Declare(quartz_icons URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.${QUARTZ_ICONS_TYPE}" URL_HASH "SHA256=${QUARTZ_ICONS_HASH}" DOWNLOAD_NO_EXTRACT ON)
 	FetchContent_MakeAvailable(quartz_icons)
 
-	set(QUARTZ_ICONS_CODEPOINTS_HASH "3e5293b71c38cb0487ab5fc5de293956aab4f96f445ae482849cce3df345aec9") # codepoints
+	set(QUARTZ_ICONS_CODEPOINTS_HASH "441f782d0e16325739a299e61d9431999b597fb2e6d75afa8a170cad32a957a9") # codepoints
 	FetchContent_Declare(quartz_codepoints URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.codepoints" URL_HASH "SHA256=${QUARTZ_ICONS_CODEPOINTS_HASH}" DOWNLOAD_NO_EXTRACT ON)
 	FetchContent_MakeAvailable(quartz_codepoints)
 
