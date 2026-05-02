@@ -22,26 +22,37 @@ AppWindow {
 			}
 		}
 	}
-	TabBar {
-		id: tabbar
-		width: parent.width
-		Repeater {
-			model: pagesmodel
-			TabButton {
-				required property string fileName
-				text: fileName.slice(0, -8)
-			}
-		}
-		Component.onDestruction: settings.currentTab = currentIndex;
-	}
-	Loader {
-		id: pageloader
-		focus: true
-		anchors { top: tabbar.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
-		source: pagesmodel.status == FolderListModel.Ready ? "pages/" + pagesmodel.get(tabbar.currentIndex, "fileName") : ""
-	}
 	Settings {
 		id: settings
 		property int currentTab: 0
+	}
+	NavigationDrawerPage {
+		model: ["Demo", "Page"]
+		Item {
+			TabBar {
+				id: tabbar
+				width: parent.width
+				Repeater {
+					model: pagesmodel
+					TabButton {
+						required property string fileName
+						text: fileName.slice(0, -8)
+					}
+				}
+				Component.onDestruction: settings.currentTab = currentIndex;
+			}
+			Loader {
+				id: pageloader
+				focus: true
+				anchors { top: tabbar.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
+				source: pagesmodel.status == FolderListModel.Ready ? "pages/" + pagesmodel.get(tabbar.currentIndex, "fileName") : ""
+			}
+		}
+		Item {
+			Label {
+				text: "Empty Page"
+				anchors.centerIn: parent
+			}
+		}
 	}
 }
