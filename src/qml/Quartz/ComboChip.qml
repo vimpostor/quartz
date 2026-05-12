@@ -7,14 +7,19 @@ Chip {
 	property alias model: combo.model
 	property alias currentIndex: combo.currentIndex
 	property string selectedText: checked ? combo.currentText : ""
+	function open() {
+		combo.forceActiveFocus();
+		combo.popup.open();
+	}
 
 	type: Chip.Type.Filter
 	checked: currentIndex + 1
 	text: checked ? selectedText : category
 	leftIco.name: checked ? "check" : ""
 	rightIco.name: "arrow_drop_down"
-	onClicked: combo.popup.open()
-	onRightIconClicked: combo.popup.open()
+	icoFocusPolicy: Qt.ClickFocus
+	onClicked: open()
+	onRightIconClicked: open()
 	ComboBox {
 		id: combo
 		property int lastIndex: -1

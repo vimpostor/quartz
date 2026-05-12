@@ -16,6 +16,7 @@ Button {
 	property alias leftIco: leftIcon
 	property alias rightIco: rightIcon.ico
 	property alias imageSource: img.source
+	property alias icoFocusPolicy: rightIcon.focusPolicy
 	signal rightIconClicked()
 
 	height: 32
