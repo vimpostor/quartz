@@ -74,7 +74,7 @@ function(quartz_bundle_android_openssl target)
 endfunction()
 
 function(quartz_generate_launcher_icons target)
-	list(APPEND IMAGEMAGICK_PREFIX "magick" "-background" "none" "${CMAKE_SOURCE_DIR}/assets/${target}.svg" "-resize")
+	list(APPEND IMAGEMAGICK_PREFIX "magick" "-density" "1024" "-background" "none" "${CMAKE_SOURCE_DIR}/assets/${target}.svg" "-resize")
 	if (ANDROID)
 		list(APPEND ICON_COMMANDS COMMAND "sh" "-c" "mkdir -p ${CMAKE_SOURCE_DIR}/android/res/drawable-\\{l,m,h,xh,xxh,xxxh\\}dpi")
 		list(APPEND ICON_COMMANDS COMMAND ${IMAGEMAGICK_PREFIX} "36x36" "${CMAKE_SOURCE_DIR}/android/res/drawable-ldpi/${target}.png")
