@@ -29,8 +29,8 @@ QList<QString> Codepoints::allIconNames() {
 	return res;
 }
 
-QString Codepoints::codepointToStr(const int32_t codepoint) {
-	return QString(static_cast<QChar>(codepoint));
+QString Codepoints::codepointToStr(const char32_t codepoint) {
+	return QString::fromUcs4(&codepoint, 1);
 }
 
 void Codepoints::init() {

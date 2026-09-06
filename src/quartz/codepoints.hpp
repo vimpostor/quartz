@@ -14,8 +14,8 @@ public:
 
 	Q_INVOKABLE QString icon(QString name);
 	Q_INVOKABLE QList<QString> allIconNames();
-	static QString codepointToStr(const int32_t codepoint);
+	static QString codepointToStr(const char32_t codepoint);
 private:
-	QHash<QString, int> codepoints;
+	QHash<QString, char32_t> codepoints;
 	void init();
 };
