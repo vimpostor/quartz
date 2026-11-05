@@ -5,6 +5,9 @@ import QtQuick.Controls.Material.impl
 SearchField {
 	id: searchfield
 	height: 56
+	signal searched()
+	onAccepted: searched()
+	onSearchTriggered: searched()
 	background: Rectangle {
 		implicitHeight: searchfield.height
 		radius: 16
