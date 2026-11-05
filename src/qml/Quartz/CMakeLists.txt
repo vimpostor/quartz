@@ -24,20 +24,20 @@ set_target_properties("${PROJECT_NAME}" PROPERTIES QT_QMLCACHEGEN_ARGUMENTS "--o
 function(quartz_bundle_icons target style)
 	include(FetchContent)
 
-	set(QUARTZ_ICONS_ARCHIVE "https://github.com/google/material-design-icons/raw/0cbb08816df07faaae3dca060d4ebb10b66c214f/variablefont")
+	set(QUARTZ_ICONS_ARCHIVE "https://github.com/google/material-design-icons/raw/10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7/variablefont")
 	set(QUARTZ_ICONS_NAME "MaterialSymbols${style}%5BFILL,GRAD,opsz,wght%5D")
 	set(QUARTZ_ICONS_TYPE "ttf")
 
-	set(QUARTZ_ICONS_HASH "9370e7137b1a952fb00c5caf770291ea24be807dc0940983f0e3fd81dab0c054") # Outlined
+	set(QUARTZ_ICONS_HASH "f7837ba8573d9a7a74931618ced8307bc81f96d49af296bf6c8052c772ed5282") # Outlined
 	if (style EQUAL "Rounded")
-		set(QUARTZ_ICONS_HASH "24f9f678388abc5a0e2c5bf722eeab7aea08a0a058459920d5eb117bf0f8557b") # Rounded
+		set(QUARTZ_ICONS_HASH "7e74e36533ccee12c2b81e75bfcf3ccf123d3bb7e7e46d65d94445f23db0c97c") # Rounded
 	elseif (style EQUAL "Sharp")
-		set(QUARTZ_ICONS_HASH "2d504758bc37b2589b69f1bd1aaf8c38248ceb2d2105e56629d7bc62c01714cd") # Sharp
+		set(QUARTZ_ICONS_HASH "1fd72f99ec1f44ec461c74f99341c1dcfa8c140d7087a2902e747d4ee01e379b") # Sharp
 	endif()
 	FetchContent_Declare(quartz_icons URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.${QUARTZ_ICONS_TYPE}" URL_HASH "SHA256=${QUARTZ_ICONS_HASH}" DOWNLOAD_NO_EXTRACT ON)
 	FetchContent_MakeAvailable(quartz_icons)
 
-	set(QUARTZ_ICONS_CODEPOINTS_HASH "cbea7bfbd34d1d4f8dd2628c34587e447f935cf4f2219b264988da48736eca75") # codepoints
+	set(QUARTZ_ICONS_CODEPOINTS_HASH "a7404d9e5a1b63f496cf05ace45d386075886b5a7f123fba9f29527cb6006fde") # codepoints
 	FetchContent_Declare(quartz_codepoints URL "${QUARTZ_ICONS_ARCHIVE}/${QUARTZ_ICONS_NAME}.codepoints" URL_HASH "SHA256=${QUARTZ_ICONS_CODEPOINTS_HASH}" DOWNLOAD_NO_EXTRACT ON)
 	FetchContent_MakeAvailable(quartz_codepoints)
 
