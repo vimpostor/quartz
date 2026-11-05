@@ -66,7 +66,7 @@ Item {
 				Chip {
 					type: Chip.Type.Input
 					text: "Bob"
-					imageSource: "https://m1.material.io/assets/0B5-3BCtasWxEV2R6bkNDOUxFZ00/style-icons-product-human-best-do1.png"
+					imageSource: "https://storage.googleapis.com/material-io-design/m1/assets/0B5-3BCtasWxEV2R6bkNDOUxFZ00/style-icons-product-human-best-do1.png"
 					rightIco.name: "close"
 				}
 			}
