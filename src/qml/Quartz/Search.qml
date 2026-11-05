@@ -6,8 +6,8 @@ SearchField {
 	id: searchfield
 	height: 56
 	signal searched()
-	onAccepted: searched()
-	onSearchTriggered: searched()
+	onSearchTriggered: searched();
+	onSearchButtonPressed: searched();
 	background: Rectangle {
 		implicitHeight: searchfield.height
 		radius: 16
