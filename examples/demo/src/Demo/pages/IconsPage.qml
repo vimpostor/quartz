@@ -11,7 +11,7 @@ Item {
 		Search {
 			id: search
 			placeholderText: "Search icons"
-			width: parent.width - 16
+			implicitWidth: parent.width - 16
 			Layout.alignment: Qt.AlignHCenter
 			focus: true
 		}
