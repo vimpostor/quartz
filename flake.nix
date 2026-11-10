@@ -9,11 +9,11 @@
 	cmakeProjectVersion = c: builtins.head (builtins.match ".*project\\([[:alnum:]]+ VERSION ([0-9]+\.[0-9]+).*" (builtins.readFile c));
 	iconResource = p: s: t: p.stdenv.mkDerivation rec {
 		name = "quartzIcons" + t;
-		fetchurl = builtins.head (builtins.match ".*set\\(QUARTZ_ICONS_ARCHIVE \"([[:alnum:]:/\.-]+)\"\\).*" (builtins.readFile ./src/Quartz/CMakeLists.txt)) + "/MaterialSymbols" + s + "%5BFILL,GRAD,opsz,wght%5D." + t;
+		fetchurl = builtins.head (builtins.match ".*set\\(QUARTZ_ICONS_ARCHIVE \"([[:alnum:]:/\.-]+)\"\\).*" (builtins.readFile ./src/qml/Quartz/CMakeLists.txt)) + "/MaterialSymbols" + s + "%5BFILL,GRAD,opsz,wght%5D." + t;
 		src = builtins.fetchurl {
 			url = fetchurl;
 			name = "fetchurl";
-			sha256 = builtins.head (builtins.match (".*set\\(QUARTZ_ICONS[[:alpha:]_]*_HASH \"([[:alnum:]]{64})\"\\) # " + (if t == "codepoints" then t else s) + ".*") (builtins.readFile ./src/Quartz/CMakeLists.txt));
+			sha256 = builtins.head (builtins.match (".*set\\(QUARTZ_ICONS[[:alpha:]_]*_HASH \"([[:alnum:]]{64})\"\\) # " + (if t == "codepoints" then t else s) + ".*") (builtins.readFile ./src/qml/Quartz/CMakeLists.txt));
 		};
 		dontUnpack = true;
 		installPhase = "install -D $src $out/" + builtins.baseNameOf fetchurl;
