@@ -4,8 +4,9 @@ import QtQuick.Controls.Material.impl
 
 SearchField {
 	id: searchfield
-	height: 56
 	signal searched()
+	height: 56
+	font.pointSize: 16
 	onSearchTriggered: searched();
 	onSearchButtonPressed: searched();
 	background: Rectangle {
