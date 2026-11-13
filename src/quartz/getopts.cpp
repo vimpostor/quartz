@@ -1,5 +1,6 @@
 #include "getopts.hpp"
 
+#include <QRegularExpression>
 #include <ranges>
 
 namespace quartz {
@@ -15,10 +16,9 @@ QStringList prepend_args(int argc, char *argv[], const char *prepend) {
 
 	if (prepend) {
 		// add prepend args
-		// just split prepend at every space for simplicity
-		// in theory we would need to do more advanced parsing, e.g. respect ""
-		for (const auto &word : std::views::split(std::string_view(prepend), ' ')) {
-			result.push_back(QString::fromUtf8(word));
+		static const QRegularExpression spaces {"\\s+(?=([^\"]*\"[^\"]*\")*[^\"]*$)"};
+		for (auto &word : QString(prepend).split(spaces)) {
+			result.push_back(word.remove('"'));
 		}
 	}
 
